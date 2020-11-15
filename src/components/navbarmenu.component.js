@@ -17,19 +17,19 @@ export default class NavbarMenu extends Component{
               <Link to = '/user/status' className="navbar-brand"> Status</Link>            
               <Nav className="mr-auto">
               <NavDropdown title="Mój profil" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="#action/3.1"> Moje Dane </NavDropdown.Item>
-                 <NavDropdown.Item href="#action/3.2"> Edytuj Dane</NavDropdown.Item>
-                 <NavDropdown.Item href="#action/3.3"> Zmień hasło</NavDropdown.Item>
+                 <NavDropdown.Item href="/user/data/:id"> Moje Dane </NavDropdown.Item>
+                 <NavDropdown.Item href="/user/data/edit/:id"> Edytuj Dane</NavDropdown.Item>
+                 <NavDropdown.Item href="/user/password/edit/:id"> Zmień hasło</NavDropdown.Item>
                  <NavDropdown.Divider />
-                 <NavDropdown.Item href="#action/3.4"> Usuń konto</NavDropdown.Item>
+                 <NavDropdown.Item href="/user/delete/:id"> Usuń konto</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Jedzenie" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="#action/3.1"> Pokaż dziennik </NavDropdown.Item>
-                 <NavDropdown.Item href="#action/3.2"> Dodaj jedzenie</NavDropdown.Item>
+                 <NavDropdown.Item href="/food/diary/:id"> Pokaż dziennik </NavDropdown.Item>
+                 <NavDropdown.Item href="/food/diary/add/:id"> Dodaj jedzenie</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Ćwiczenia" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="#action/3.1"> Pokaż dziennik </NavDropdown.Item>
-                 <NavDropdown.Item href="#action/3.2"> Dodaj Ćwiczenia</NavDropdown.Item>
+                 <NavDropdown.Item href="/exercise/diary/:id"> Pokaż dziennik </NavDropdown.Item>
+                 <NavDropdown.Item href="/exercise/diary/add/:id"> Dodaj Ćwiczenia</NavDropdown.Item>
               </NavDropdown>
               </Nav>
               <Form inline>
