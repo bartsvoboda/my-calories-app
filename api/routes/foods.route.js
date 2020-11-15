@@ -61,6 +61,7 @@ router.route('/add').post((req,res) => {
         kcals,
         user_id,
         date
+        //"2020-11-15T17:00:40.464Z"
     });
 
     newFood.save()
