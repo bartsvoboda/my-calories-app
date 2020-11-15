@@ -12,6 +12,7 @@ import GetFoodDiary from './components/display-food-diary.component';
 import AddFood from './components/add-food.component';
 import AddExercise from './components/add-exercises.component';
 import GetExercisesDiary from './components/display-exercises.component';
+import CreateUser from './components/create-user.component';
 
 
 
@@ -30,6 +31,8 @@ function App() {
       <Route path="/food/diary/add/:id" exact component ={AddFood} />
       <Route path="/exercise/diary/add/:id" exact component ={AddExercise} />
       <Route path="/exercise/diary/:id" exact component ={GetExercisesDiary} />
+      <Route path="/user/add" exact component ={CreateUser} />
+
       </div>
     </Router>
      
