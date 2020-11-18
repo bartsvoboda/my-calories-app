@@ -1,6 +1,9 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))

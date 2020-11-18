@@ -8,3 +8,14 @@
     "goalWeight": 70,
     "activity": 1
 }
+
+{
+    "name": "jabłko",
+    "weight": 50,
+    "proteins": 1,
+    "carbohydrates": 14,
+    "fats": 2,
+    "kcals": 68,
+    "user_id": "5fb15eb891b607526ef1792d",
+    "date": "2020-11-15T17:00:40.464Z"
+}
