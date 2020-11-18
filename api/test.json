@@ -1,0 +1,21 @@
+{
+    "email": "kim@test.com",
+    "password": "tester1",
+    "username": "Kim1",
+    "age": 21,
+    "isMale": true,
+    "currentWeight": 87,
+    "goalWeight": 70,
+    "activity": 1
+}
+
+{
+    "name": "jabłko",
+    "weight": 50,
+    "proteins": 1,
+    "carbohydrates": 14,
+    "fats": 2,
+    "kcals": 68,
+    "user_id": "5fb536a8d13df51c3d40c867",
+    "date": "2020-11-15T17:00:40.464Z"
+}

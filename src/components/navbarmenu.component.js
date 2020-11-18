@@ -31,6 +31,9 @@ export default class NavbarMenu extends Component{
                  <NavDropdown.Item href="/exercise/diary/:id"> Pokaż dziennik </NavDropdown.Item>
                  <NavDropdown.Item href="/exercise/diary/add/:id"> Dodaj Ćwiczenia</NavDropdown.Item>
               </NavDropdown>
+              <NavDropdown title="Test" id="basic-nav-dropdown">
+                 <NavDropdown.Item href="/user/add"> Dodaj uzytkownika </NavDropdown.Item>
+              </NavDropdown>
               </Nav>
               <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
