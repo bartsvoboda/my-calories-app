@@ -8,9 +8,26 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
   const username = req.body.username;
+  const age = Number(req.body.age);
+  const isMale = Boolean(req.body.isMale);
+  const currentWeight = Number(req.body.currentWeight);
+  const goalWeight = Number(req.body.goalWeight);
+  const activity = Number(req.body.activity);
 
-  const newUser = new User({username});
+
+  const newUser = new User({
+    email,
+    password,
+    username,
+    age,
+    isMale,
+    currentWeight,
+    goalWeight,
+    activity
+  });
 
   newUser.save()
     .then(() => res.json('User added!'))

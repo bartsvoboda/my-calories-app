@@ -1,0 +1,10 @@
+{
+    "email": "kim@test.com",
+    "password": "tester1",
+    "username": "Kim1",
+    "age": 21,
+    "isMale": true,
+    "currentWeight": 87,
+    "goalWeight": 70,
+    "activity": 1
+}
