@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const checkAuth = require("../middleware/check-auth");
+const CheckAuth = require("../middleware/check-auth");
 
 // Load food model
 let Food = require("../models/food.model");
@@ -42,7 +44,7 @@ router.route('/update/:id').post((req,res) => {
         .catch(err => res.status(400).json('Error: '+ err));
 });
 
-router.route('/add').post((req,res) => {
+router.post('/add', checkAuth,(req,res)  => {
     const name = req.body.name;
     const weight = Number(req.body.weight);
     const proteins = Number(req.body.proteins);
