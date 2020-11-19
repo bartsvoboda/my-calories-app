@@ -14,6 +14,8 @@ import AddExercise from './components/add-exercises.component';
 import GetExercisesDiary from './components/display-exercises.component';
 import CreateUser from './components/create-user.component';
 import EditExercise from './components/edit-exercise.component';
+import Login from './components/login.component';
+import Register from './components/register.component';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
       <Route path="/exercise/diary/:id" exact component ={GetExercisesDiary} />
       <Route path="/user/add" exact component ={CreateUser} />
       <Route path="/exercise/edit/:id" exact component = {EditExercise} />
+      <Route path="/register" exact component ={Register} />
+      <Route path="/login" exact component = {Login} />
+
 
       </div>
     </Router>
