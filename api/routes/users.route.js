@@ -31,6 +31,7 @@ router.route('/register').post((req, res) => {
             const username = req.body.username;
             const age = Number(req.body.age);
             const isMale = Boolean(req.body.isMale);
+            const height = Number(req.body.height);
             const currentWeight = Number(req.body.currentWeight);
             const goalWeight = Number(req.body.goalWeight);
             const activity = Number(req.body.activity);
@@ -41,6 +42,7 @@ router.route('/register').post((req, res) => {
               username,
               age,
               isMale,
+              height,
               currentWeight,
               goalWeight,
               activity
