@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getJwt } from '../helpers/jwt';
 
 export default class AuthenitcatedComponent extends Component {
     constructor(props) {
@@ -9,7 +10,16 @@ export default class AuthenitcatedComponent extends Component {
         }
     }
 
-    
+    componentDidMount(){
+        const jwt = getJwt();
+        if(!jwt) {
+            this.props.history.push('/');
+        }
+
+        axios.get
+    }
+
+
     render() {
         return(
             <div>

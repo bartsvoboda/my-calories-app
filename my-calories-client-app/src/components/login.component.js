@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+import axios from "axios";
 
 export default class AddFood extends Component {
   constructor(props) {
@@ -30,19 +31,27 @@ export default class AddFood extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
+    axios.post('http://localhost:5000/users/login', {
       email: this.state.email,
       password: this.state.password
-    }
+    }).then(response => {
+      localStorage.setItem('jwt-token', JSON.stringify(response.data))
+    });
+    // const user = {
+    //   email: this.state.email,
+    //   password: this.state.password
+    // }
     
-    console.log(user);
+    // console.log(user);
     
   }
-
 
   render() {
       return (
           <div>
+             <div className ="jumbotron">
+              <h1>siemka</h1>
+            </div>
             <h3>Zaloguj się</h3>
             <form onSubmit={this.onSubmit}>
               <div className="form-group"> 

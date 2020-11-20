@@ -22,8 +22,7 @@ function App() {
   return (
     <Router>
        <div className="container">
-      <NavbarMenu />
-      <br/>
+         
       <Route path="/user/status" exact component= {UserStatus} />
       <Route path="/user/data/:id" exact component ={UserData} />
       <Route path="/user/data/edit/:id" exact component ={UserDataEdit} />
@@ -36,7 +35,7 @@ function App() {
       <Route path="/user/add" exact component ={CreateUser} />
       <Route path="/exercise/edit/:id" exact component = {EditExercise} />
       <Route path="/register" exact component ={Register} />
-      <Route path="/login" exact component = {Login} />
+      <Route path="/" exact component = {Login} />
 
 
       </div>
