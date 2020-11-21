@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 
 
 router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => {
-  return res.send(req.user);
+  console.log(req.headers);  
+  res.send(req.user.username);
 });
 
 router.route('/').get((req, res) => {
@@ -88,9 +89,8 @@ router.post("/login", (req, res, next) => {
                 expiresIn: "1h"
             }
           );
-          return res.status(200).json({
-            token: token
-          });
+          
+          return res.status(200).send(token);
         }
         res.status(401).json({
           message: "Auth failed"

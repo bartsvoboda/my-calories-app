@@ -2,7 +2,7 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import NavbarMenu from './components/navbarmenu.component';
+// import NavbarMenu from './components/navbarmenu.component';
 import UserStatus from './components/user-status.component';
 import UserData from './components/user-data.component';
 import UserDataEdit from './components/edit-user-data.component';
@@ -16,15 +16,16 @@ import CreateUser from './components/create-user.component';
 import EditExercise from './components/edit-exercise.component';
 import Login from './components/login.component';
 import Register from './components/register.component';
+import AuthenticatedComponent from './components/auth.component';
 
 
 function App() {
   return (
     <Router>
        <div className="container">
-         
-      <Route path="/user/status" exact component= {UserStatus} />
-      <Route path="/user/data/:id" exact component ={UserData} />
+     
+      
+      <Route path="/user/data/" exact component ={UserData} />
       <Route path="/user/data/edit/:id" exact component ={UserDataEdit} />
       <Route path="/user/password/edit/:id" exact component ={UserPasswordEdit} />
       <Route path="/user/delete/:id" exact component ={UserDeleteAccount} />
@@ -37,6 +38,9 @@ function App() {
       <Route path="/register" exact component ={Register} />
       <Route path="/" exact component = {Login} />
 
+      <AuthenticatedComponent>
+        <Route path="/user/status" component= {UserStatus} />
+      </AuthenticatedComponent>  
 
       </div>
     </Router>

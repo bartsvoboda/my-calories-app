@@ -35,7 +35,8 @@ export default class AddFood extends Component {
       email: this.state.email,
       password: this.state.password
     }).then(response => {
-      localStorage.setItem('jwt-token', JSON.stringify(response.data))
+      localStorage.setItem('jwt-token', response.data);
+      this.props.history.push("/user/status");
     });
     // const user = {
     //   email: this.state.email,

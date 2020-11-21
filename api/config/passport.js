@@ -12,9 +12,9 @@ const opts = {
 };
 
 const strategy = new JwtStrategy(opts, (payload, next) => {
-  console.log(payload);
   User.findById({ _id: payload.userId })
   .then(res => {
+    console.log(res);
     next(null, res);
   });
 });

@@ -2,22 +2,6 @@ import React , { Component } from 'react';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-const user = {
-    firstname: "Kim",
-    lastname: "Chyong-Sun"
-};
-
-function formatName(user) {
-    
-}
-  
-function calculateBMI(user) {
-    let BMI = user.weight/((user.height*0.01) **2);
-    return BMI.toFixed(2);
-}
-
-
-
 export default class UserStatus extends Component {
     constructor(props){
         super(props);
