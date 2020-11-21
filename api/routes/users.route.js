@@ -1,8 +1,13 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
-
+const passport = require('../config/passport');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+
+router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => {
+  return res.send(req.user);
+});
 
 router.route('/').get((req, res) => {
   User.find()
