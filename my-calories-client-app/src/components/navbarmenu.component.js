@@ -14,7 +14,7 @@ export default class NavbarMenu extends Component{
               <Link to = '/user/status' className="navbar-brand"> Status</Link>            
               <Nav className="mr-auto">
               <NavDropdown title="Mój profil" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="/user/data/:id"> Moje Dane </NavDropdown.Item>
+                 <NavDropdown.Item href="/user/data/"> Moje Dane </NavDropdown.Item>
                  <NavDropdown.Item href="/user/data/edit/:id"> Edytuj Dane</NavDropdown.Item>
                  <NavDropdown.Item href="/user/password/edit/:id"> Zmień hasło</NavDropdown.Item>
                  <NavDropdown.Divider />

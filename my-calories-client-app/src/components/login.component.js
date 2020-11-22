@@ -14,7 +14,7 @@ export default class AddFood extends Component {
           password:''
       }
   }
-
+ 
   onChangeEmail(e){
       this.setState({
           email: e.target.value

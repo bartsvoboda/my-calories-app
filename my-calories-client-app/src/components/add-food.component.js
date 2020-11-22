@@ -3,6 +3,8 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
+import NavbarMenu from './navbarmenu.component';
+
 export default class AddFood extends Component {
     constructor(props) {
         super(props);
@@ -102,76 +104,78 @@ export default class AddFood extends Component {
     render() {
         return (
             <div>
-              <h3>Create New Exercise Log</h3>
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group"> 
-                  <label>Nazwa produktu: </label>
-                  <input type = "text"
-                      required
-                      className="form-control"
-                      value={this.state.name}
-                      onChange={this.onChangeName}
-                      />
-                </div>
-                <div className="form-group"> 
-                  <label>Waga produktu: </label>
-                  <input  type="text"
-                      required
-                      className="form-control"
-                      value={this.state.weight}
-                      onChange={this.onChangeWeight}
-                      />
-                </div>
-                <div className="form-group">
-                  <label> Białko (na 100 gram): </label>
-                  <input 
-                      type="text" 
-                      className="form-control"
-                      value={this.state.proteins}
-                      onChange={this.onChangeProteins}
-                      />
-                </div>
-                <div className="form-group">
-                  <label> Węglowodany (na 100 gram): </label>
-                  <input 
-                      type="text" 
-                      className="form-control"
-                      value={this.state.carbohydrates}
-                      onChange={this.onChangeCarbohydrates}
-                      />
-                </div>
-                <div className="form-group">
-                  <label> Tłuszcze (na 100 gram): </label>
-                  <input 
-                      type="text" 
-                      className="form-control"
-                      value={this.state.fats}
-                      onChange={this.onChangeFats}
-                      />
-                </div>
-                <div className="form-group">
-                  <label>UserId: </label>
-                  <input 
-                      type="text" 
-                      className="form-control"
-                      value={this.state.user_id}
-                      onChange={this.onChangeUserId}
-                      />
-                </div>
-                <div className="form-group">
-                  <label>Date: </label>
-                  <div>
-                    <DatePicker
-                      selected={this.state.date}
-                      onChange={this.onChangeDate}
-                    />
-                  </div>
-                </div>
-        
-                <div className="form-group">
-                  <input type="submit" value="Create Food Log" className="btn btn-primary" />
-                </div>
-              </form>
+                <NavbarMenu/>
+                <br/>
+                <h3>Create New Exercise Log</h3>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group"> 
+                    <label>Nazwa produktu: </label>
+                    <input type = "text"
+                        required
+                        className="form-control"
+                        value={this.state.name}
+                        onChange={this.onChangeName}
+                        />
+                    </div>
+                    <div className="form-group"> 
+                    <label>Waga produktu: </label>
+                    <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.weight}
+                        onChange={this.onChangeWeight}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label> Białko (na 100 gram): </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.proteins}
+                        onChange={this.onChangeProteins}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label> Węglowodany (na 100 gram): </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.carbohydrates}
+                        onChange={this.onChangeCarbohydrates}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label> Tłuszcze (na 100 gram): </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.fats}
+                        onChange={this.onChangeFats}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label>UserId: </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.user_id}
+                        onChange={this.onChangeUserId}
+                        />
+                    </div>
+                    <div className="form-group">
+                    <label>Date: </label>
+                    <div>
+                        <DatePicker
+                        selected={this.state.date}
+                        onChange={this.onChangeDate}
+                        />
+                    </div>
+                    </div>
+            
+                    <div className="form-group">
+                    <input type="submit" value="Create Food Log" className="btn btn-primary" />
+                    </div>
+                </form>
             </div>
             )
     }

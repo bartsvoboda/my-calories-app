@@ -2,6 +2,8 @@ import React , { Component } from 'react';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
+import NavbarMenu from './navbarmenu.component';
+
 export default class UserStatus extends Component {
     constructor(props){
         super(props);
@@ -26,17 +28,19 @@ export default class UserStatus extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <label> Nazwa uzytkownika:</label>
-                    <p>{this.p}</p>
-                </div>            
-                <p > Nazwa uzytkownika: </p>
-                <p> Obecna waga: </p>
-                <p> Docelowa waga:</p>
-                <p> BMI: {this.state.fullname} </p>
-                <p> STAN: </p>
-                <p> Ilość dziennych kalorii: </p>
-                <ProgressBar now={60} />
+                <NavbarMenu/>
+                <br/>
+                    <div>
+                        <label> Nazwa uzytkownika:</label>
+                        <p>{this.p}</p>
+                    </div>            
+                    <p > Nazwa uzytkownika: </p>
+                    <p> Obecna waga: </p>
+                    <p> Docelowa waga:</p>
+                    <p> BMI: {this.state.fullname} </p>
+                    <p> STAN: </p>
+                    <p> Ilość dziennych kalorii: </p>
+                    <ProgressBar now={60} />
             </div>
         )
     }

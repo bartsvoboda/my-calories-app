@@ -1,9 +1,14 @@
 import React , { Component } from 'react';
 
+import NavbarMenu from './navbarmenu.component';
+
 export default class UserDeleteAccount extends Component {
     render() {
         return (
-            <h1> Usuń Konto</h1>
+            <div>
+                <NavbarMenu/>
+                <h1> Usuń Konto</h1>
+            </div>
         )
     }
 }

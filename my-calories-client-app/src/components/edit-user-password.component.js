@@ -1,4 +1,5 @@
 import React , { Component } from 'react';
+
 import NavbarMenu from './navbarmenu.component';
 
 export default class UserPasswordEdit extends Component {
@@ -7,7 +8,7 @@ export default class UserPasswordEdit extends Component {
             <div>
             <NavbarMenu/> 
             <br/>
-            <h1> Edytuj hasło</h1>
+                <h1> Edytuj hasło</h1>
             </div>
         )
     }

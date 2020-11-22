@@ -2,6 +2,8 @@ import React , { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import NavbarMenu from './navbarmenu.component';
+
 const Exercise = props => (
 <tr>
   <td>{props.exercise.username}</td>
@@ -52,22 +54,24 @@ export default class GetExercisesDiary extends Component {
     render() {
         return (
           <div>
-            <h3>Logged Exercises</h3>
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th>Username</th>
-                  <th>Description</th>
-                  <th>Chuj</th>
-                  <th>Duration</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                { this.exerciseList() }
-              </tbody>
-            </table>
+            <NavbarMenu/>
+            <br/>
+              <h3>Logged Exercises</h3>
+              <table className="table">
+                <thead className="thead-light">
+                  <tr>
+                    <th>Username</th>
+                    <th>Description</th>
+                    <th>Chuj</th>
+                    <th>Duration</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  { this.exerciseList() }
+                </tbody>
+              </table>
           </div>
         )
     }
