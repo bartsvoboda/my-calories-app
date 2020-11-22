@@ -16,7 +16,7 @@ import CreateUser from './components/create-user.component';
 import EditExercise from './components/edit-exercise.component';
 import Login from './components/login.component';
 import Register from './components/register.component';
-import AuthenticatedComponent from './components/auth.component';
+// import AuthenticatedComponent from './components/auth.component';
 
 
 function App() {
@@ -37,11 +37,7 @@ function App() {
       <Route path="/exercise/edit/:id" exact component = {EditExercise} />
       <Route path="/register" exact component ={Register} />
       <Route path="/" exact component = {Login} />
-
-      <AuthenticatedComponent>
-        <Route path="/user/status" component= {UserStatus} />
-      </AuthenticatedComponent>  
-
+      <Route path="/user/status" component= {UserStatus} />
       </div>
     </Router>
      

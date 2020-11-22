@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 import NavbarMenu from './navbarmenu.component';
+import AuthenticatedComponent from './auth.component';
 
 export default class AddFood extends Component {
     constructor(props) {
@@ -105,6 +106,7 @@ export default class AddFood extends Component {
         return (
             <div>
                 <NavbarMenu/>
+                <AuthenticatedComponent/>
                 <br/>
                 <h3>Create New Exercise Log</h3>
                 <form onSubmit={this.onSubmit}>

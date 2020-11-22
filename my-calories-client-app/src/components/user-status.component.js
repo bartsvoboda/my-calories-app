@@ -3,6 +3,7 @@ import React , { Component } from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import NavbarMenu from './navbarmenu.component';
+import AuthenticatedComponent from './auth.component';
 
 export default class UserStatus extends Component {
     constructor(props){
@@ -29,6 +30,7 @@ export default class UserStatus extends Component {
         return (
             <div>
                 <NavbarMenu/>
+                <AuthenticatedComponent/>
                 <br/>
                     <div>
                         <label> Nazwa uzytkownika:</label>

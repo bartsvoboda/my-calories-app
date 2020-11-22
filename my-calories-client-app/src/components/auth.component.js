@@ -31,10 +31,6 @@ class AutheniticatedComponent extends Component {
             localStorage.removeItem('jwt-token');
             this.props.history.push('/')
         });
-        // .catch(err =>{
-        //     localStorage.removeItem('jwt-token');
-        //     <Route path = "/" />
-        // });
     }
 
 

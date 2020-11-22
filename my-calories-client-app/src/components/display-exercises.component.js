@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import NavbarMenu from './navbarmenu.component';
+import AuthenticatedComponent from './auth.component';
 
 const Exercise = props => (
 <tr>
@@ -55,6 +56,7 @@ export default class GetExercisesDiary extends Component {
         return (
           <div>
             <NavbarMenu/>
+            <AuthenticatedComponent/>
             <br/>
               <h3>Logged Exercises</h3>
               <table className="table">

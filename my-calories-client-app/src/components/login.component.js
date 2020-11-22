@@ -51,9 +51,14 @@ export default class AddFood extends Component {
       return (
           <div>
              <div className ="jumbotron">
-              <h1>siemka</h1>
+              <h1><strong>MyCalories</strong></h1>
+              <br/>
+              <p>Witaj w aplikacji pozwalającej na monitorowanie kalorii z jedzenia i ćwiczeń</p>
+              <p>Jezeli masz konto zaloguj się, jeżeli chcesz założyć konto kliknij na poniższy przycisk</p>
+              <a class="btn btn-primary btn-lg" href="/register" role="button">Zarejestruj</a>
             </div>
-            <h3>Zaloguj się</h3>
+            <h2>Zaloguj się</h2>
+            <br/>
             <form onSubmit={this.onSubmit}>
               <div className="form-group"> 
                 <label>Email: </label>
