@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Navbar, Nav, NavDropdown, Form, Button} from 'react-bootstrap';
 
 export default class NavbarMenu extends Component{
+   constructor(props){
+      super(props);
+
+      this.submitLogout = this.submitLogout.bind(this);
+   }
+
+   submitLogout(e){
+      localStorage.removeItem('jwt-token');
+   }
 
     render() {
         return (
@@ -17,7 +21,7 @@ export default class NavbarMenu extends Component{
               <Link to = '/user/status' className="navbar-brand"> Status</Link>            
               <Nav className="mr-auto">
               <NavDropdown title="Mój profil" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="/user/data/:id"> Moje Dane </NavDropdown.Item>
+                 <NavDropdown.Item href="/user/data/"> Moje Dane </NavDropdown.Item>
                  <NavDropdown.Item href="/user/data/edit/:id"> Edytuj Dane</NavDropdown.Item>
                  <NavDropdown.Item href="/user/password/edit/:id"> Zmień hasło</NavDropdown.Item>
                  <NavDropdown.Divider />
@@ -32,13 +36,13 @@ export default class NavbarMenu extends Component{
                  <NavDropdown.Item href="/exercise/diary/add/:id"> Dodaj Ćwiczenia</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Test" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="/user/add"> Dodaj uzytkownika </NavDropdown.Item>
+                 <NavDropdown.Item href="/register"> Dodaj uzytkownika </NavDropdown.Item>
+                 <NavDropdown.Item href="/login"> Zaloguj smiecia </NavDropdown.Item>
               </NavDropdown>
               </Nav>
               <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-info">Search</Button>
-              </Form>
+                  <Button variant="primary" href="/" onClick={this.submitLogout}>Wyloguj</Button>
+               </Form>
             </Navbar>
             </>
         );

@@ -29,6 +29,10 @@ const userSchema = new Schema({
     type: Boolean,
     required: true
   },
+  height: {
+    type: Number,
+    required: true
+  },
   currentWeight: {
     type: Number,
     required: true
@@ -38,7 +42,7 @@ const userSchema = new Schema({
     required: true
   },
   activity: {
-    type: Number,
+    type: String,
     required: true
   }
 }, {

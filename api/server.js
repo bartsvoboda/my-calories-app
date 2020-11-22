@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const passport = require('./config/passport');
 
 require('dotenv').config();
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -25,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
 
 const exercisesRouter = require('./routes/exercises.route');
 const usersRouter = require('./routes/users.route');

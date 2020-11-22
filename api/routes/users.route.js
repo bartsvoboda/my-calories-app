@@ -1,8 +1,14 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
-
+const passport = require('../config/passport');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+
+router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => {
+  console.log(req.headers);  
+  res.send(req.user.username);
+});
 
 router.route('/').get((req, res) => {
   User.find()
@@ -31,9 +37,10 @@ router.route('/register').post((req, res) => {
             const username = req.body.username;
             const age = Number(req.body.age);
             const isMale = Boolean(req.body.isMale);
+            const height = Number(req.body.height);
             const currentWeight = Number(req.body.currentWeight);
             const goalWeight = Number(req.body.goalWeight);
-            const activity = Number(req.body.activity);
+            const activity = req.body.activity;
 
             const newUser = new User({
               email,
@@ -41,6 +48,7 @@ router.route('/register').post((req, res) => {
               username,
               age,
               isMale,
+              height,
               currentWeight,
               goalWeight,
               activity
@@ -81,10 +89,8 @@ router.post("/login", (req, res, next) => {
                 expiresIn: "1h"
             }
           );
-          return res.status(200).json({
-            message: "Auth successful",
-            token: token
-          });
+          
+          return res.status(200).send(token);
         }
         res.status(401).json({
           message: "Auth failed"
