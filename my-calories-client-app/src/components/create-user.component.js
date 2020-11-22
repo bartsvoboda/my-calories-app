@@ -39,7 +39,18 @@ export default class CreateUser extends Component {
       <div>
         <h3>Create New User</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group"> 
+          <div className = "form-row col-md-5">
+            <div className="form-group col-md-5"> 
+              <label>Username: </label>
+              <input  type="text"
+                  required
+                  className="form-control"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  />
+            </div>
+
+            <div className="form-group row-cols-md-4"> 
             <label>Username: </label>
             <input  type="text"
                 required
@@ -48,6 +59,11 @@ export default class CreateUser extends Component {
                 onChange={this.onChangeUsername}
                 />
           </div>
+
+          </div>
+          
+
+          
           <div className="form-group">
             <input type="submit" value="Create User" className="btn btn-primary" />
           </div>

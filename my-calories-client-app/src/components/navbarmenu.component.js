@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Navbar, Nav, NavDropdown, Form, Button} from 'react-bootstrap';
 
 export default class NavbarMenu extends Component{
+   constructor(props){
+      super(props);
+
+      this.submitLogout = this.submitLogout.bind(this);
+   }
+
+   submitLogout(e){
+      localStorage.removeItem('jwt-token');
+   }
 
     render() {
         return (
@@ -33,6 +40,9 @@ export default class NavbarMenu extends Component{
                  <NavDropdown.Item href="/login"> Zaloguj smiecia </NavDropdown.Item>
               </NavDropdown>
               </Nav>
+              <Form inline>
+                  <Button variant="primary" href="/" onClick={this.submitLogout}>Wyloguj</Button>
+               </Form>
             </Navbar>
             </>
         );

@@ -42,7 +42,7 @@ const userSchema = new Schema({
     required: true
   },
   activity: {
-    type: Number,
+    type: String,
     required: true
   }
 }, {

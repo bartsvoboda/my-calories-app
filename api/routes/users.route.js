@@ -40,7 +40,7 @@ router.route('/register').post((req, res) => {
             const height = Number(req.body.height);
             const currentWeight = Number(req.body.currentWeight);
             const goalWeight = Number(req.body.goalWeight);
-            const activity = Number(req.body.activity);
+            const activity = req.body.activity;
 
             const newUser = new User({
               email,
