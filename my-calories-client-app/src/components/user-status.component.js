@@ -47,14 +47,6 @@ export default class UserStatus extends Component {
         })
     }
 
-    // calculateBMI(){
-    //     var heightInMeters = this.state.height * 0.00;
-    //     var calculatedBMI = this.state.currentWeight / heightInMeters ** 2;
-
-    //     this.setState({BMI: calculatedBMI});
-    // }
-    
-
 
     render() {
         //Calculate BMI
@@ -146,17 +138,21 @@ export default class UserStatus extends Component {
                         <h1> Witaj <i> {this.state.username} ! </i> </h1>
                         <br/>
                         <p> Twój obecny stan to <strong> {status} </strong>. Dla twojego wzrostu idealna waga to od <strong> {minPerfectWeight.toFixed(2)} </strong> kg do <strong> {maxPerfectWeight.toFixed(2)} </strong> kg .</p> 
-                        <p> Twoj cel to <strong>{goal} </strong>. Wskazana zmiana wagi powinna wynosić 0,5 kg na tydzień.</p>
+                        <p> Twoj cel to <strong>{goal} </strong>. Rekomendowana zmiana wagi wynosi 0,5 kg na tydzień.</p>
                         
                         <p> Przy twojej aktywności: <strong>{activityLevel} </strong> musisz dostarczać {dailyCalories} kcal dziennie, aby osiągnąć cel.</p>
+                        <br/>
+                        <br/>
+
+                        <p> <strong>Nazwa uzytkownika: </strong> {this.state.username} </p>
+                        <p> <strong> Obecna waga: </strong> {this.state.currentWeight} kg </p>
+                        <p> <strong> Docelowa waga: </strong> {this.state.goalWeight} kg</p>
+                        <p> <strong> BMI: </strong> {BMI.toFixed(2)} </p>
+                        <p> <strong> STAN: </strong>{status} </p>
+                        <p> <strong> BMR: </strong> {BMR.toFixed(0)} kcal</p>
+                        <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories} kcal </p>
                 </Jumbotron>        
-                    <p> <strong>Nazwa uzytkownika: </strong> {this.state.username} </p>
-                    <p> <strong> Obecna waga: </strong> {this.state.currentWeight} kg </p>
-                    <p> <strong> Docelowa waga: </strong> {this.state.goalWeight} kg</p>
-                    <p> <strong> BMI: </strong> {BMI.toFixed(2)} </p>
-                    <p> <strong> STAN: </strong>{status} </p>
-                    <p> <strong> BMR: </strong> {BMR.toFixed(0)} kcal</p>
-                    <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories} kcal </p>
+                   
             </div>
         )
     }
