@@ -32,7 +32,9 @@ router.route('/update/:id').post((req, res) => {
 
 
 router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
-  const userId = req.user.id;
+  console.log(req.headers);
+
+  const userId = req.body.userId;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const kcalperhour = Number(req.body.kcalperhour);
@@ -45,6 +47,8 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
     kcalperhour,
     date,
   });
+
+  
 
   newExercise.save()
   .then(() => res.json('Exercise added!'))
