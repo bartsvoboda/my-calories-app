@@ -17,12 +17,8 @@ const exerciseSchema = new Schema({
   },
   kcalperhour: {
     type: Number,
-    required: true}
-  , 
-  date: { 
-    type: Date,
-    required: true 
-  },
+    required: true
+  }, 
 }, {
   timestamps: true,
 });

@@ -32,10 +32,12 @@ app.use(passport.initialize());
 const exercisesRouter = require('./routes/exercises.route');
 const usersRouter = require('./routes/users.route');
 const foodRouter = require('./routes/foods.route');
+const diaryRouter = require('./routes/diary.route');
 
 app.use('/exercises', exercisesRouter);
 app.use('/users', usersRouter);
 app.use('/foods', foodRouter);
+app.use('/diary', diaryRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
