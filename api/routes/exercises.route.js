@@ -46,9 +46,7 @@ router.route('/update/:id').post((req, res) => {
 
 
 router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
-  console.log(req.headers);
-
-  const userId = req.body.userId;
+  const userId = req.user.id;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const kcalperhour = Number(req.body.kcalperhour);
