@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const passport = require('passport');
 let Exercise = require('../models/exercise.model');
 
 router.route('/').get((req, res) => {
@@ -30,15 +31,15 @@ router.route('/update/:id').post((req, res) => {
 });
 
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
+router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
+  const userId = req.user.id;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const kcalperhour = Number(req.body.kcalperhour);
   const date = Date.parse(req.body.date);
 
   const newExercise = new Exercise({
-    username,
+    userId,
     description,
     duration,
     kcalperhour,
