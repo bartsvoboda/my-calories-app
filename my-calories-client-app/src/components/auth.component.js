@@ -3,9 +3,6 @@ import { withRouter } from "react-router-dom";
 import { getJwt } from '../helpers/jwt';
 import axios from 'axios';
 
-
-// const {history} = this.props;
-
 class AutheniticatedComponent extends Component {
     constructor(props) {
         super(props);
@@ -25,7 +22,7 @@ class AutheniticatedComponent extends Component {
         {headers: { Authorization: `Bearer ${tokenjwt}`}})
         .then(res =>{
             console.log(res.data);
-            this.setState({username: res.data})
+            this.setState({username: res.data.username})
         })
         .catch(err => {
             localStorage.removeItem('jwt-token');

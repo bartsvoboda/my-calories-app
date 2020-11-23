@@ -5,9 +5,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => {
-  console.log(req.headers);  
-  res.send(req.user.username);
+router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
+  res.send(req.user);
 });
 
 router.route('/').get((req, res) => {

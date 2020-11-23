@@ -24,12 +24,12 @@ export default class Register extends Component {
       email: '',
       password: '',
       username: '',
-      age: '',
+      age: 0,
       isMale: true,
       height: 0,
       currentWeight: 0,
       goalWeight: 0,
-      activity: 0
+      activity: ''
     }
   }
 
