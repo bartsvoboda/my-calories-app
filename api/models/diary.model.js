@@ -20,12 +20,10 @@ const diarySchema = new Schema({
         required: true
     },
     products: {
-        type:Array,
-        required: true
+        type:Array
     },
     exercises: {
-        type: Array,
-        required: true
+        type: Array
     }
 });
 

@@ -54,6 +54,11 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
   const kcalperhour = Number(req.body.kcalperhour);
   const date = Date.parse(req.body.date);
 
+  const dateYear = req.body.dateYear;
+  const dateMonth = req.body.dateMonth;
+  const dateDay = req.body.dateDay;
+  const exercises = req.body._id;
+
   const newExercise = new Exercise({
     userId,
     description,
@@ -62,10 +67,22 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
     date,
   });
 
+  const newDiary = new Diary({
+    userId,
+    exercises,
+    dateYear,
+    dateMonth,
+    dateDay
+  });
+
   
 
   newExercise.save()
   .then(() => res.json('Exercise added!'))
+  .catch(err => res.status(400).json('Error: ' + err));
+
+  newDiary.save()
+  .then(()=> res.json('Diary added!'))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
