@@ -54,6 +54,7 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
   const dateMonth = req.body.dateMonth;
   const dateDay = req.body.dateDay;
 
+
   const newExercise = new Exercise({
     userId,
     description,
@@ -63,6 +64,8 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
     dateMonth,
     dateDay
   });
+
+  console.log(newExercise);
 
   newExercise.save()
   .then(() => res.json('Exercise added!'))

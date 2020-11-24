@@ -28,11 +28,19 @@ const foodSchema = new Schema({
         required: true
     },
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
-    date: {
-        type: Date,
+    dateYear: {
+        type: String,
+        required: true
+    },
+    dateMonth: {
+        type: String,
+        required: true
+    },
+    dateDay: {
+        type: String,
         required: true
     }
 }, {

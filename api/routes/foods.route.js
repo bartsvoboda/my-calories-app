@@ -52,7 +52,9 @@ router.post('/add',(req,res)  => {
     const fats = Number(req.body.fats);
     const kcals = Number(req.body.kcals);
     const user_id = req.body.user_id;
-    const date = Date.parse(req.body.date);
+    const dateYear = req.body.dateYear;
+    const dateMonth = req.body.dateMonth;
+    const dateDay = req.body.dateDay;
 
     const newFood = new Food({
         name,
@@ -62,8 +64,9 @@ router.post('/add',(req,res)  => {
         fats,
         kcals,
         user_id,
-        date
-        //"2020-11-15T17:00:40.464Z"
+        dateYear,
+        dateMonth,
+        dateDay
     });
 
     newFood.save()
