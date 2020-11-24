@@ -22,8 +22,7 @@ export default class NavbarMenu extends Component{
               <Nav className="mr-auto">
               <NavDropdown title="Mój profil" id="basic-nav-dropdown">
                  <NavDropdown.Item href="/user/data/"> Moje Dane </NavDropdown.Item>
-                 <NavDropdown.Item href="/user/data/edit/:id"> Edytuj Dane</NavDropdown.Item>
-                 <NavDropdown.Item href="/user/password/edit/:id"> Zmień hasło</NavDropdown.Item>
+                 <NavDropdown.Item href="/user/edit"> Edytuj Dane</NavDropdown.Item>
                  <NavDropdown.Divider />
                  <NavDropdown.Item href="/user/delete/:id"> Usuń konto</NavDropdown.Item>
               </NavDropdown>
@@ -35,10 +34,7 @@ export default class NavbarMenu extends Component{
                  <NavDropdown.Item href="/exercise/diary/:id"> Pokaż dziennik </NavDropdown.Item>
                  <NavDropdown.Item href="/exercise/diary/add/:id"> Dodaj Ćwiczenia</NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Test" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="/register"> Dodaj uzytkownika </NavDropdown.Item>
-                 <NavDropdown.Item href="/login"> Zaloguj smiecia </NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link>Dziennik</Nav.Link>
               </Nav>
               <Form inline>
                   <Button variant="primary" href="/" onClick={this.submitLogout}>Wyloguj</Button>
