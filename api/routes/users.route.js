@@ -15,6 +15,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Register
 router.route('/register').post((req, res) => {
   //Check if user already exist
   User.find({email: req.body.email})
@@ -62,6 +63,7 @@ router.route('/register').post((req, res) => {
     })
 });
 
+//Login and generate token
 router.post("/login", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -103,6 +105,25 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+//Update user data
+router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
+  const id = req.body._id;
+
+  console.log(req.body);
+
+  User.updateOne({_id:id}, {$set: req.body})
+  .exec()
+  .then(result =>{
+      console.log(result);
+      res.status(200).json(result);
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+  });
+});
+
 
 module.exports = router;
 
