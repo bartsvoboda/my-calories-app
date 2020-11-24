@@ -19,6 +19,18 @@ const exerciseSchema = new Schema({
     type: Number,
     required: true
   }, 
+  dateYear: {
+    type: String,
+    required: true
+  },
+  dateMonth: {
+    type: String,
+    required: true
+  },
+  dateDay: {
+    type: String,
+    required: true
+  }
 }, {
   timestamps: true,
 });
