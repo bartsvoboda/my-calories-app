@@ -108,9 +108,9 @@ router.post("/login", (req, res, next) => {
 
 //Update user data
 router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
-  const id = req.body._id;
+  const id = req.user._id;
 
-  console.log(req.body);
+  console.log(id);
 
   User.updateOne({_id:id}, {$set: req.body})
   .exec()
