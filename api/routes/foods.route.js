@@ -3,16 +3,29 @@ const passport = require('passport');
 const Food = require('../models/food.model');
 
 
-router.route('/').get((req, res) => {
-    Food.find()
-    .then(foods =>{
-        res.status(200).json(foods)
+router.get('/', passport.authenticate('jwt', { session: false}), (req, res)=>{
+    const userId = req.user.id;
+  
+    Food.find({userId: userId})
+    .then( foods =>{
+      res.status(200).json(foods);
     })
-    .catch(err => {
-        res.status(500).json({
-            error: err
-        });
+    .catch(err =>{
+      res.status(500).json(err);
+    });
+});
+
+router.get('/:id', passport.authenticate('jwt', { session: false}), (req, res)=>{
+    const id = req.params.id;
+  
+    Food.findById({_id: id})
+    .then( food =>{
+      console.log(food);
+      res.status(200).json(food);
     })
+    .catch(err =>{
+      res.status(500).json(err);
+    });
 });
 
 router.route('/:id').delete((req,res) => {
@@ -23,24 +36,27 @@ router.route('/:id').delete((req,res) => {
         .catch(err => res.status(400).json('Error: '+ err));
 });
 
-router.route('/update/:id').post((req,res) => {
-    Food.findById (req.params.id)
-        .then(food => {
-            food.name = req.body.name;
-            food.weight = Number(req.body.weight);
-            food.proteins = Number(req.body.proteins);
-            food.carbohydrates = Number(req.body.carbohydrates);
-            food.fats = Number(req.body.fats);
-            food.kcals = Number(req.body.kcals);
-            food.user_id = req.body.user_id;
-            food.date = Date.parse(req.body.date);
-
-            food.save()
-                .then(()=> res.json('Food updated!'))
-                .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: '+ err));
+router.post('/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
+    Food.findById(req.params.id)
+      .then(food => {
+        food.name = req.body.name,
+        food.weight = Number(req.body.duration),
+        food.proteins = Number(req.body.proteins),
+        food.carbohydrates = Number(req.body.carbohydrates),
+        food.fats = Number(req.body.fats),
+        food.kcals = Number(req.body.kcals),
+        food.dateYear = Number(req.body.dateYear),
+        food.dateMonth = Number(req.body.dateMonth),
+        food.dateDay = Number(req.body.dateDay)
+  
+        food.save()
+          .then(() => res.json('Food updated!'))
+          .catch(err => res.status(400).json('Error: ' + err));
+      })
+      .catch(err => res.status(400).json('Error: ' + err));
+  
 });
+
 
 router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
     const userId = req.user.id;

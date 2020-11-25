@@ -9,7 +9,6 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res)=>{
 
   Exercise.find({userId: userId})
   .then( exercises =>{
-    console.log(exercises);
     res.status(200).json(exercises);
   })
   .catch(err =>{
