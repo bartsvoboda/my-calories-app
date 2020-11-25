@@ -8,7 +8,7 @@ import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 import { getJwt } from '../helpers/jwt';
 
-import CaloriesDiary from './calories-diary.component';
+import CaloriesDailyDiary from './calories-diary.component';
 
 
 export default class UserStatus extends Component {
@@ -163,6 +163,9 @@ export default class UserStatus extends Component {
                         <p> <strong> STAN: </strong>{status} </p>
                         <p> <strong> BMR: </strong> {BMR.toFixed(0)} kcal</p>
                         <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories.toFixed(0)} kcal </p>
+                        <br/>
+                        
+                        <CaloriesDailyDiary dailyCalories={dailyCalories.toFixed(0)} />
                 </Jumbotron>        
                    
             </div>

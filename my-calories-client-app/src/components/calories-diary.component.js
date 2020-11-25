@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
-export default class CaloriesDiary extends Component {
+
+export default class CaloriesDailyDiary extends Component {
     render(){
         return(
             <div>
-                <h1>Dziennik Kalori</h1>
+                <h1>Dzisiejszy bilans kaloryczny</h1>
+                <br/>
                 <p>{this.props.dailyCalories}</p>
             </div>
         );
