@@ -157,6 +157,7 @@ export default class UserStatus extends Component {
                         <br/>
 
                         <p> <strong>Nazwa uzytkownika: </strong> {this.state.username} </p>
+                        <p> <strong> Wzrost: </strong> {this.state.height} cm</p>
                         <p> <strong> Obecna waga: </strong> {this.state.currentWeight} kg </p>
                         <p> <strong> Docelowa waga: </strong> {this.state.goalWeight} kg</p>
                         <p> <strong> BMI: </strong> {BMI.toFixed(2)} </p>
