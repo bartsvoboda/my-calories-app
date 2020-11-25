@@ -45,9 +45,9 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const kcalperhour = Number(req.body.kcalperhour);
-  const dateYear = req.body.dateYear;
-  const dateMonth = req.body.dateMonth;
-  const dateDay = req.body.dateDay;
+  const dateYear = Number(req.body.dateYear);
+  const dateMonth = Number(req.body.dateMonth);
+  const dateDay = Number(req.body.dateDay);
 
 
   const newExercise = new Exercise({

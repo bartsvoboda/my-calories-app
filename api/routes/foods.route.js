@@ -50,9 +50,9 @@ router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => 
     const carbohydrates = Number(req.body.carbohydrates);
     const fats = Number(req.body.fats);
     const kcals = Number(req.body.kcals);
-    const dateYear = req.body.dateYear;
-    const dateMonth = req.body.dateMonth;
-    const dateDay = req.body.dateDay;
+    const dateYear = Number(req.body.dateYear);
+    const dateMonth = Number(req.body.dateMonth);
+    const dateDay = Number(req.body.dateDay);
 
     const newFood = new Food({
         name,

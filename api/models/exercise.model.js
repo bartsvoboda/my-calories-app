@@ -20,15 +20,15 @@ const exerciseSchema = new Schema({
     required: true
   }, 
   dateYear: {
-    type: String,
+    type: Number,
     required: true
   },
   dateMonth: {
-    type: String,
+    type: Number,
     required: true
   },
   dateDay: {
-    type: String,
+    type: Number,
     required: true
   }
 }, {

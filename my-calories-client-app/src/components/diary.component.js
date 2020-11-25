@@ -46,7 +46,7 @@ export default class CaloriesDiary extends Component {
         .then(res => {
             console.log(res.data);
             this.setState({
-                exercises: res.data
+                exercises: res.data.filter(el => el.dateDay === this.state.dateDay)
             })            
         })
         .catch(error => {
@@ -93,6 +93,7 @@ export default class CaloriesDiary extends Component {
                     </tbody>
                 </table>
                 <p>Suma Kalorii z ćwiczeń : {exerciseSumKcal.toFixed(0)}</p>
+                <p>{typeof(this.state.dateDay)}</p>
             </div>
         );
     }
