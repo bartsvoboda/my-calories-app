@@ -8,6 +8,8 @@ import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 import { getJwt } from '../helpers/jwt';
 
+import CaloriesDiary from './calories-diary.component';
+
 
 export default class UserStatus extends Component {
     constructor(props){
@@ -76,7 +78,7 @@ export default class UserStatus extends Component {
         }
 
         //calculate BMR according to Mifflin-St Jeor method
-        let BMR = undefined;
+        let BMR = 0;
 
         if(this.state.isMale){
             BMR = (9.99 * this.state.currentWeight) + (6.25 * this.state.height) - (4.92 * this.state.age) + 5;
@@ -86,7 +88,7 @@ export default class UserStatus extends Component {
         }
 
         //calculate Daily Calories intake
-        let BMRwithActivity = undefined;
+        let BMRwithActivity = 0;
         let activityLevel = undefined;
 
         if(this.state.activity === '1') {
@@ -115,10 +117,10 @@ export default class UserStatus extends Component {
         
         //Calculate propoper daily calories intake
         let goal = undefined;
-        let dailyCalories = undefined;
+        let dailyCalories = 0;
         if(this.state.currentWeight>this.state.goalWeight){
             goal = "Utrata masy ciała";
-            dailyCalories = BMRwithActivity - 500.0; 
+            dailyCalories = BMRwithActivity - 500; 
         } 
         if (this.state.currentWeight === this.state.goalWeight){
             goal = "Utrzymanie masy ciała";
@@ -126,10 +128,18 @@ export default class UserStatus extends Component {
         } 
         if (this.state.currentWeight < this.state.goalWeight){
             goal = "Zwiekszenie masy ciała";
-            dailyCalories = BMRwithActivity + 500.0;
+            dailyCalories = BMRwithActivity + 500;
         }
 
-        //
+        //Estimate number of weeks to reach weight
+        let numberofWeeks=0;
+        if(goal === "Utrata masy ciała"){
+            numberofWeeks = (this.state.currentWeight - this.state.goalWeight)/0.5;
+        }
+        if(goal === "Zwiekszenie masy ciała"){
+            numberofWeeks = (this.state.goalWeight - this.state.currentWeight)/0.5;
+        }
+        
 
         return (
             <div>
@@ -141,7 +151,8 @@ export default class UserStatus extends Component {
                         <p> Twój obecny stan to <strong> {status} </strong>. Dla twojego wzrostu idealna waga to od <strong> {minPerfectWeight.toFixed(2)} </strong> kg do <strong> {maxPerfectWeight.toFixed(2)} </strong> kg .</p> 
                         <p> Twoj cel to <strong>{goal} </strong>. Rekomendowana zmiana wagi wynosi 0,5 kg na tydzień.</p>
                         
-                        <p> Przy twojej aktywności: <strong>{activityLevel} </strong> musisz dostarczać {dailyCalories} kcal dziennie, aby osiągnąć cel.</p>
+                        <p> Przy twojej aktywności: <strong>{activityLevel} </strong> musisz dostarczać <strong>{dailyCalories.toFixed(0)} </strong> kcal dziennie aby osiągnąć cel.</p>
+                        <p> Osiągniecie twojej docelowej masy ciała zajmie Ci około <strong>{numberofWeeks} tygodni</strong> przy zmianie pół kilograma tygodniowo.</p>
                         <br/>
                         <br/>
 
@@ -151,7 +162,7 @@ export default class UserStatus extends Component {
                         <p> <strong> BMI: </strong> {BMI.toFixed(2)} </p>
                         <p> <strong> STAN: </strong>{status} </p>
                         <p> <strong> BMR: </strong> {BMR.toFixed(0)} kcal</p>
-                        <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories} kcal </p>
+                        <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories.toFixed(0)} kcal </p>
                 </Jumbotron>        
                    
             </div>
