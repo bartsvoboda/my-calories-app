@@ -15,7 +15,8 @@ import CreateUser from './components/create-user.component';
 import EditExercise from './components/edit-exercise.component';
 import Login from './components/login.component';
 import Register from './components/register.component';
-import CaloriesDiary from './components/calories-diary.component';
+import CaloriesDailyDiary from './components/calories-diary.component';
+import CaloriesDiary from './components/diary.component';
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
         <Route path="/exercise/edit/:id" exact component = {EditExercise} />
         <Route path="/register" exact component ={Register} />
         <Route path="/" exact component = {Login} />
-        <Route path="/caloriesDiary" export component = {CaloriesDiary} />
+        <Route path="/caloriesDiary" export component = {CaloriesDailyDiary} />
+        <Route path="/diary" exact component = {CaloriesDiary} />
       </div>
     </Router>
      

@@ -5,20 +5,15 @@ const Exercise = require('../models/exercise.model');
 
 
 router.get('/', passport.authenticate('jwt', { session: false}), (req, res)=>{
-  const date = req.body.date;
-  var tomorrow = new Date();
-  var today = new Date(req.body.date);
-  tomorrow.setDate(today.getDate()+1);
-  tomorrow.setHours(0,0,0,0);
-  today.setHours(0,0,0,0);
-  // const userId = req.body.userId;
-    Exercise.find({date: {$gt:today, $lt:tomorrow}})
-  .then(response =>{
-    console.log(response);
-    res.status(500).send(response);
+  const userId = req.user.id;
+
+  Exercise.find({userId: userId})
+  .then( exercises =>{
+    console.log(exercises);
+    res.status(200).json(exercises);
   })
   .catch(err =>{
-    res.status(200).send(err);
+    res.status(500).json(err);
   });
 });
 

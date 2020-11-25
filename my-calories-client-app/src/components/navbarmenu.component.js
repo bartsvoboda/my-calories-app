@@ -34,7 +34,7 @@ export default class NavbarMenu extends Component{
                  <NavDropdown.Item href="/exercise/diary/:id"> Pokaż dziennik </NavDropdown.Item>
                  <NavDropdown.Item href="/exercise/diary/add/:id"> Dodaj Ćwiczenia</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/caloriesDiary">Dziennik</Nav.Link>
+              <Nav.Link href="/diary">Dziennik</Nav.Link>
               </Nav>
               <Form inline>
                   <Button variant="primary" href="/" onClick={this.submitLogout}>Wyloguj</Button>
