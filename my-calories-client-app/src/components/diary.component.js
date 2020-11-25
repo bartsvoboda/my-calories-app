@@ -6,8 +6,6 @@ import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 import {Col, Button, Form, Jumbotron} from 'react-bootstrap';
 
-import CaloriesDailyDiary from './calories-diary.component';
-
 import { getJwt } from '../helpers/jwt';
 import { getReqCalories} from '../helpers/calories';
 

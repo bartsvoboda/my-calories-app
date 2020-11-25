@@ -23,20 +23,20 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
-  Exercise.findById(req.params.id)
-    .then(exercise => {
-      exercise.username = req.body.username;
-      exercise.description = req.body.description;
-      exercise.duration = Number(req.body.duration);
-      exercise.kcalperhour = Number(req.body.kcalperhour);
-      exercise.date = Date.parse(req.body.date);
+router.patch('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const id = req.params.id;
 
-      exercise.save()
-        .then(() => res.json('Exercise updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-    })
-    .catch(err => res.status(400).json('Error: ' + err));
+  Exercise.updateOne({_id:id}, {$set: req.body})
+  .exec()
+  .then(result => {
+    console.log(result);
+    res.status(200).json(result);
+  })
+  .catch(err => {
+    res.status(500).json({
+      error: err
+    });
+  })
 });
 
 
