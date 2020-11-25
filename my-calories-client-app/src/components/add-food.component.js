@@ -176,7 +176,7 @@ export default class AddFood extends Component {
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridFoodProteins">
-                        <Form.Label>Ilość białka (na 100 gram)</Form.Label>
+                        <Form.Label>Białko (na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Ilość białka"
@@ -187,24 +187,35 @@ export default class AddFood extends Component {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridFoodCarbohydrates">
-                        <Form.Label>Ilość węglowodanów (na 100 gram)</Form.Label>
+                        <Form.Label>Węglowodany (na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
-                            placeholder="Ilość węglowodanów"
+                            placeholder="Węglowodany"
                             required 
                             value={this.state.carbohydrates}
                             onChange={this.onChangeCarbohydrates}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridFoodFoods">
-                        <Form.Label>Ilość tłuszczu (na 100 gram)</Form.Label>
+                        <Form.Group as={Col} controlId="formGridFoodFats">
+                        <Form.Label>Tłuszcze (na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
-                            placeholder="Ilość tłuszczu"
+                            placeholder="Tłuszcze"
                             required 
                             value={this.state.fats}
                             onChange={this.onChangeFats}
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridFoodKcals">
+                        <Form.Label>Kalorie (na 100 gram)</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            placeholder="Ilość kalorii"
+                            required 
+                            value={this.state.kcals}
+                            onChange={this.onChangeKcals}
                             />
                         </Form.Group>
                     </Form.Row>
@@ -280,7 +291,7 @@ export default class AddFood extends Component {
                     </Form.Row>
 
                     <Button variant="primary" type="submit">
-                        Dodaj ćwiczenie
+                        Dodaj produkt
                     </Button>
                 </Jumbotron>
             </Form>

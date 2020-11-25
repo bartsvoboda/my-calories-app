@@ -20,12 +20,28 @@ const Exercise = props => (
     </tr>
 )
 
+const Food = props => (
+    <tr>
+        <td>{props.food.name}</td>
+        <td>{props.food.weight}</td>
+        <td>{props.food.proteins}</td>
+        <td>{props.food.carbohydrates}</td>
+        <td>{props.food.fats}</td>
+        <td>{props.food.kcals}</td>
+        <td>{(props.food.kcals/100).toPrecision(1)*props.food.weight}</td>
+        <td>
+            <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
+        </td>
+    </tr>
+)
+
 
 export default class CaloriesDiary extends Component {
     constructor(props) {
         super(props);
 
         this.deleteExercise = this.deleteExercise.bind(this);
+        this.deleteFood = this.deleteFood.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeMonth = this.onChangeMonth.bind(this);
         this.onChangeDay = this.onChangeDay.bind(this);
@@ -60,6 +76,23 @@ export default class CaloriesDiary extends Component {
         .catch(error => {
             console.log(error);
         })
+
+        axios.get('http://localhost:5000/foods',
+        {headers: {Authorization: `Bearer ${tokenjwt}`}})
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                foods: res.data.filter(el => el.dateDay === this.state.dateDay 
+                    && el.dateMonth === this.state.dateMonth 
+                    && el.dateYear === this.state.dateYear)
+            })            
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+
+
     }
 
     onChangeYear(e){
@@ -94,6 +127,22 @@ export default class CaloriesDiary extends Component {
         })
     }
 
+    deleteFood(id) {
+        axios.delete('http://localhost:5000/foods/'+id)
+        .then(response => console.log(response.data));
+        this.setState({
+            foods: this.state.foods.filter(el => el._id !== id)
+        })
+    }
+
+    foodsList() {
+        return this.state.foods.map(currentfood => {
+            return <Food food = {currentfood} deleteFood={this.deleteFood} key={currentfood._id}/>;
+        })
+    }
+
+
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -110,6 +159,20 @@ export default class CaloriesDiary extends Component {
             console.log(res.data);
             this.setState({
                 exercises: res.data.filter(el => el.dateDay === choosedDay 
+                    && el.dateMonth === choosedMonth 
+                    && el.dateYear === choosedYear)
+            })            
+        })
+        .catch(error => {
+            console.log(error);
+        })
+
+        axios.get('http://localhost:5000/foods',
+        {headers: {Authorization: `Bearer ${tokenjwt}`}})
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                foods: res.data.filter(el => el.dateDay === choosedDay 
                     && el.dateMonth === choosedMonth 
                     && el.dateYear === choosedYear)
             })            
@@ -206,7 +269,9 @@ export default class CaloriesDiary extends Component {
                         Pokaż dziennik
                     </Button>
                 </Form>
-                
+
+                <br/>
+
                 <Jumbotron>
                     <h3> Dzisiejsze Ćwiczenia</h3>
                     <table className = "table">
@@ -215,7 +280,7 @@ export default class CaloriesDiary extends Component {
                                 <th>Nazwa</th>
                                 <th>Czas Trwania (minuty)</th>
                                 <th>Kcal/godzina</th>
-                                <th> Kcal </th>
+                                <th>Kcal </th>
                                 <th>Akcje</th>
                             </tr>
                         </thead>
@@ -225,6 +290,27 @@ export default class CaloriesDiary extends Component {
                     </table>
                     <p>Suma Kalorii z ćwiczeń : {exerciseSumKcal.toFixed(1)}</p>
                     <p>{this.state.dateDay}</p>
+                </Jumbotron>
+
+                <Jumbotron>
+                    <h3> Dzisiejsze Posiłki</h3>
+                    <table className = "table">
+                        <thead className = "thead-light">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Waga (gram)</th>
+                                <th>Białko (gram)</th>
+                                <th>Węglowodany (gram)</th>
+                                <th>Tłuszcze (gram)</th>
+                                <th>Kcal/100g</th>
+                                <th>Kcal</th>
+                                <th>Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.foodsList()}
+                        </tbody>
+                    </table>
                 </Jumbotron>
                 
             </div>
