@@ -287,7 +287,7 @@ export default class CaloriesDiary extends Component {
                     </Form.Row>
 
                     <Button variant="primary" type="submit">
-                        Pokaż dziennik
+                        Odświerz dziennik
                     </Button>
                 </Form>
 

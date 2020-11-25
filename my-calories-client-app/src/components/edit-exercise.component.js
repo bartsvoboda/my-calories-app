@@ -19,15 +19,17 @@ export default class AddExercise extends Component {
         this.onChangeDay = this.onChangeDay.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+        let todayDate = new Date();
 
 
         this.state = {
+            exerciseId: '',
             description: '',
             duration:0,
             kcalperhour:0,
-            dateYear: 0,
-            dateMonth: 0,
-            dateDay: 0
+            dateYear: todayDate.getFullYear(),
+            dateMonth: todayDate.getMonth()+1,
+            dateDay: todayDate.getDate()
         }
     }
 
@@ -40,13 +42,10 @@ export default class AddExercise extends Component {
         .then(res => {
             console.log(res.data._id);
             this.setState({
+                exerciseId: res.data._id,
                 description: res.data.description,
                 duration: res.data.duration,
-                kcalperhour: res.data.kcalperhour,
-                dateYear: res.data.dateYear,
-                dateMonth: res.data.dateMonth,
-                dateDay: res.data.dateDay
-
+                kcalperhour: res.data.kcalperhour
             });  
             console.log(typeof(res.data.dateDay));         
         })
@@ -80,16 +79,15 @@ export default class AddExercise extends Component {
 
     onChangeMonth(e){
         this.setState({
-            dateMonth: e.target.value.toNu
+            dateMonth: e.target.value
         });
     }
 
     onChangeDay(e){
-        var Day = e.target.value;
-        parseInt(Day);
         this.setState({
-            dateDay: Day
+            dateDay: e.target.value
         });
+        
     }
 
     onSubmit(e) {
@@ -103,17 +101,18 @@ export default class AddExercise extends Component {
             dateMonth: this.state.dateMonth,
             dateDay: this.state.dateDay
         }
+        
 
-        console.log(exercise);
+        console.log(typeof(exercise.dateDay));
 
-        axios.patch('http://localhost:5000/exercises/'+this.props.match.params.id, exercise, {
+        axios.post('http://localhost:5000/exercises/'+this.props.match.params.id, exercise, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
         })
         .then(res => console.log(res.data));
 
-        this.props.history.push("/diary");
+        this.props.history.push('/diary');
     }
 
     render() {
@@ -166,7 +165,7 @@ export default class AddExercise extends Component {
                     <Form.Row>
                     <Form.Group as={Col} controlId="formGridYear">
                         <Form.Label>Rok</Form.Label>
-                        <Form.Control as="select" defaultValue={toString(this.state.dateYear)} onChange={this.onChangeYear} inputype="number">
+                        <Form.Control as="select" defaultValue={this.state.dateYear} onChange={this.onChangeYear} >
                             <option value = "2020">2020</option>
                             <option value = "2021">2021</option>
                             <option value = "2022">2022</option>
@@ -178,7 +177,7 @@ export default class AddExercise extends Component {
 
                         <Form.Group as={Col} controlId="formGridMonth">
                         <Form.Label>Miesiąc</Form.Label>
-                        <Form.Control as="select" defaultValue={toString(this.state.dateMonth)} custom onChange={this.onChangeMonth} inputtype="number">
+                        <Form.Control as="select" defaultValue={this.state.dateMonth} onChange={this.onChangeMonth} type="number">
                             <option value = "1">1</option>
                             <option value = "2">2</option>
                             <option value = "3">3</option>
@@ -196,7 +195,7 @@ export default class AddExercise extends Component {
 
                         <Form.Group as={Col} controlId="formGridDay">
                         <Form.Label>Dzień</Form.Label>
-                        <Form.Control as="select" defaultValue={toString(this.state.dateDay)} custom onChange={this.onChangeDay} inputtype="number">
+                        <Form.Control as="select" defaultValue={this.state.dateDay}  onChange={this.onChangeDay} >
                             <option value = "1">1</option>
                             <option value = "2">2</option>
                             <option value = "3">3</option>
