@@ -28,7 +28,7 @@ const Food = props => (
         <td>{props.food.carbohydrates}</td>
         <td>{props.food.fats}</td>
         <td>{props.food.kcals}</td>
-        <td>{(props.food.kcals/100).toPrecision(1)*props.food.weight}</td>
+        <td>{(props.food.kcals/100)*props.food.weight}</td>
         <td>
             <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
         </td>
@@ -188,6 +188,22 @@ export default class CaloriesDiary extends Component {
             return prev + +(current.kcalperhour*((current.duration/60).toPrecision(1)))
         },0);
 
+        let foodSumKcal = this.state.foods.reduce(function(prev, current){
+            return prev + +((current.kcals/100) * current.weight)
+        },0);
+
+        let proteinSum = this.state.foods.reduce(function(prev,current){
+            return prev + + ((current.proteins/100)* current.weight)
+        },0);
+
+        let carbohydrateSum = this.state.foods.reduce(function(prev,current){
+            return prev + + ((current.carbohydrates/100) * current.weight)
+        },0);
+
+        let fatSum = this.state.foods.reduce(function(prev,current){
+            return prev + + ((current.fats/100) * current.weight)
+        },0);
+
 
         return(
             <div>
@@ -288,8 +304,7 @@ export default class CaloriesDiary extends Component {
                             {this.exercisesList()}
                         </tbody>
                     </table>
-                    <p>Suma Kalorii z ćwiczeń : {exerciseSumKcal.toFixed(1)}</p>
-                    <p>{this.state.dateDay}</p>
+                    <p><strong>Suma Kalorii z ćwiczeń </strong> : {exerciseSumKcal.toFixed(1)}</p>
                 </Jumbotron>
 
                 <Jumbotron>
@@ -299,9 +314,9 @@ export default class CaloriesDiary extends Component {
                             <tr>
                                 <th>Nazwa</th>
                                 <th>Waga (gram)</th>
-                                <th>Białko (gram)</th>
-                                <th>Węglowodany (gram)</th>
-                                <th>Tłuszcze (gram)</th>
+                                <th>Białko (100 gram)</th>
+                                <th>Węglowodany (100 gram)</th>
+                                <th>Tłuszcze (100 gram)</th>
                                 <th>Kcal/100g</th>
                                 <th>Kcal</th>
                                 <th>Akcje</th>
@@ -311,6 +326,11 @@ export default class CaloriesDiary extends Component {
                             {this.foodsList()}
                         </tbody>
                     </table>
+                    <br/>
+                    <p> Suma Białka: {proteinSum} gram </p>
+                    <p> Suma Węglowodanów: {carbohydrateSum} gram</p>
+                    <p> Suma Tłuszczy: {fatSum} gram</p>
+                    <p><strong>Suma Kalorii z jedzenia </strong> : {foodSumKcal.toFixed(1)}</p>
                 </Jumbotron>
                 
             </div>
