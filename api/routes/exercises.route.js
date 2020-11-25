@@ -17,6 +17,19 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res)=>{
   });
 });
 
+router.get('/:id', passport.authenticate('jwt', { session: false}), (req, res)=>{
+  const id = req.params.id;
+
+  Exercise.findById({_id: id})
+  .then( exercise =>{
+    console.log(exercise);
+    res.status(200).json(exercise);
+  })
+  .catch(err =>{
+    res.status(500).json(err);
+  });
+});
+
 router.route('/:id').delete((req, res) => {
   Exercise.findByIdAndDelete(req.params.id)
     .then(() => res.json('Exercise deleted.'))

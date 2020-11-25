@@ -85,7 +85,6 @@ export default class AddExercise extends Component {
         e.preventDefault();
         const tokenjwt = getJwt();
         const exercise = {
-            username: this.state.username,
             description: this.state.description,
             duration: this.state.duration,
             kcalperhour: this.state.kcalperhour,

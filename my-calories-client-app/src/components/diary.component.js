@@ -16,7 +16,7 @@ const Exercise = props => (
         <td>{props.exercise.kcalperhour}</td>
         <td>{(props.exercise.kcalperhour)*(props.exercise.duration/60).toPrecision(1)}</td>
         <td>
-            <Link to={"/edit/"+props.exercise._id}>Edytuj</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>Usuń</a>
+            <Link to={"exercise/edit/"+props.exercise._id}>Edytuj</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>Usuń</a>
         </td>
     </tr>
 )
@@ -72,7 +72,8 @@ export default class CaloriesDiary extends Component {
                 exercises: res.data.filter(el => el.dateDay === this.state.dateDay 
                     && el.dateMonth === this.state.dateMonth 
                     && el.dateYear === this.state.dateYear)
-            })            
+            })  
+            console.log(typeof(this.state.dateDay));       
         })
         .catch(error => {
             console.log(error);
