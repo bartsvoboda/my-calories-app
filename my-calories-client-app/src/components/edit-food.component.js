@@ -7,13 +7,17 @@ import AuthenticatedComponent from './auth.component';
 import {Col, Button, Form, Jumbotron} from 'react-bootstrap';
 import { getJwt } from '../helpers/jwt';
 
-export default class EditExercise extends Component {
+export default class EditFood extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeDuration = this.onChangeDuration.bind(this);
-        this.onChangeKcalperhour = this.onChangeKcalperhour.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeWeight = this.onChangeWeight.bind(this);
+        this.onChangeProteins = this.onChangeProteins.bind(this);
+        this.onChangeCarbohydrates = this.onChangeCarbohydrates.bind(this);
+        this.onChangeFats = this.onChangeFats.bind(this);
+        this.onChangeKcals = this.onChangeKcals.bind(this);
+        this.onChangeUserId = this.onChangeUserId.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
         this.onChangeMonth = this.onChangeMonth.bind(this);
         this.onChangeDay = this.onChangeDay.bind(this);
@@ -21,12 +25,13 @@ export default class EditExercise extends Component {
 
         let todayDate = new Date();
 
-
         this.state = {
-            exerciseId: '',
-            description: '',
-            duration:0,
-            kcalperhour:0,
+            name: '',
+            weight:0,
+            proteins:0,
+            carbohydrates:0,
+            fats:0,
+            kcals:0,
             dateYear: todayDate.getFullYear(),
             dateMonth: todayDate.getMonth()+1,
             dateDay: todayDate.getDate()
@@ -37,37 +42,60 @@ export default class EditExercise extends Component {
         const tokenjwt = getJwt();
         console.log(this.props.match.params.id);
 
-        axios.get('http://localhost:5000/exercises/'+this.props.match.params.id,
+        axios.get('http://localhost:5000/foods/'+this.props.match.params.id,
         {headers: {Authorization: `Bearer ${tokenjwt}`}})
         .then(res => {
             console.log(res.data._id);
             this.setState({
-                exerciseId: res.data._id,
-                description: res.data.description,
-                duration: res.data.duration,
-                kcalperhour: res.data.kcalperhour
-            });  
-            console.log(typeof(res.data.dateDay));         
+                name: res.data.name,
+                weight: res.data.weight,
+                proteins: res.data.proteins,
+                carbohydrates: res.data.carbohydrates,
+                fats: res.data.fats,
+                kcals: res.data.kcals
+            });      
         })
-
-        console.log(this.state.dateDay);
     }
 
-    onChangeDescription(e){
+    onChangeName(e){
         this.setState({
-            description: e.target.value
+            name: e.target.value
         });
     }
 
-    onChangeDuration(e){
+    onChangeWeight(e){
         this.setState({
-            duration: e.target.value
+            weight: e.target.value
         });
     }
 
-    onChangeKcalperhour(e){
+    onChangeProteins(e){
         this.setState({
-            kcalperhour: e.target.value
+            proteins: e.target.value
+        });
+    }
+
+    onChangeCarbohydrates(e){
+        this.setState({
+            carbohydrates: e.target.value
+        });
+    }
+
+    onChangeFats(e){
+        this.setState({
+            fats: e.target.value
+        });
+    }
+
+    onChangeKcals(e){
+        this.setState({
+            kcals: e.target.value
+        });
+    }
+
+    onChangeUserId(e){
+        this.setState({
+            user_id: e.target.value
         });
     }
 
@@ -87,85 +115,119 @@ export default class EditExercise extends Component {
         this.setState({
             dateDay: e.target.value
         });
-        
     }
 
     onSubmit(e) {
         e.preventDefault();
         const tokenjwt = getJwt();
-        const exercise = {
-            description: this.state.description,
-            duration: this.state.duration,
-            kcalperhour: this.state.kcalperhour,
+        const food = {
+            name: this.state.name,
+            weight: this.state.weight,
+            proteins: this.state.proteins,
+            carbohydrates: this.state.carbohydrates,
+            fats: this.state.fats,
+            kcals: this.state.kcals,
             dateYear: this.state.dateYear,
             dateMonth: this.state.dateMonth,
             dateDay: this.state.dateDay
         }
         
 
-        console.log(typeof(exercise.dateDay));
 
-        axios.post('http://localhost:5000/exercises/'+this.props.match.params.id, exercise, {
+        axios.post('http://localhost:5000/foods/'+this.props.match.params.id, food, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
         })
         .then(res => console.log(res.data));
 
-        this.props.history.push('/diary');
+        this.props.history.push("/diary");
     }
 
     render() {
-        // stringDay = parse
-        // stringMonth = 
-        // stringYear = 
-
         return (
             <Form onSubmit = {this.onSubmit}>
                 <AuthenticatedComponent/>
                 <NavbarMenu/>
                 <Jumbotron>
-                    <center><h3>Zaktualizuj ćwiczenie</h3></center>
+                    <center><h3>Edytuj produkt</h3></center>
                     <br/>
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridExerciseName">
-                        <Form.Label>Nazwa ćwiczenia</Form.Label>
+                        <Form.Group as={Col} controlId="formGridFoodName">
+                        <Form.Label>Nazwa produktu</Form.Label>
                         <Form.Control 
                             type="text" 
-                            placeholder="Nazwa ćwiczenia"
+                            placeholder="Nazwa produktu"
                             required
-                            value={this.state.description}
-                            onChange={this.onChangeDescription}
+                            value={this.state.name}
+                            onChange={this.onChangeName}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridDuration">
-                        <Form.Label>Czas trwania (minuty)</Form.Label>
+                        <Form.Group as={Col} controlId="formGridFoodWeight">
+                        <Form.Label>Waga produktu (w gramach na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Czas trwania"
                             required 
-                            value={this.state.duration}
-                            onChange={this.onChangeDuration}
+                            value={this.state.weight}
+                            onChange={this.onChangeWeight}
                             />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridKcalPerHour">
-                        <Form.Label>Ilość kalorii na godzinę</Form.Label>
+                    </Form.Row>
+
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridFoodProteins">
+                        <Form.Label>Białko (na 100 gram)</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            placeholder="Ilość białka"
+                            required
+                            value={this.state.proteins}
+                            onChange={this.onChangeProteins}
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridFoodCarbohydrates">
+                        <Form.Label>Węglowodany (na 100 gram)</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            placeholder="Węglowodany"
+                            required 
+                            value={this.state.carbohydrates}
+                            onChange={this.onChangeCarbohydrates}
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridFoodFats">
+                        <Form.Label>Tłuszcze (na 100 gram)</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            placeholder="Tłuszcze"
+                            required 
+                            value={this.state.fats}
+                            onChange={this.onChangeFats}
+                            />
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridFoodKcals">
+                        <Form.Label>Kalorie (na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Ilość kalorii"
-                            required
-                            value={this.state.kcalperhour}
-                            onChange={this.onChangeKcalperhour} 
+                            required 
+                            value={this.state.kcals}
+                            onChange={this.onChangeKcals}
                             />
                         </Form.Group>
                     </Form.Row>
 
+
                     <Form.Row>
                     <Form.Group as={Col} controlId="formGridYear">
                         <Form.Label>Rok</Form.Label>
-                        <Form.Control as="select" defaultValue={this.state.dateYear} onChange={this.onChangeYear} >
+                        <Form.Control as="select" defaultValue={this.state.dateYear} custom onChange={this.onChangeYear}>
                             <option value = "2020">2020</option>
                             <option value = "2021">2021</option>
                             <option value = "2022">2022</option>
@@ -177,7 +239,7 @@ export default class EditExercise extends Component {
 
                         <Form.Group as={Col} controlId="formGridMonth">
                         <Form.Label>Miesiąc</Form.Label>
-                        <Form.Control as="select" defaultValue={this.state.dateMonth} onChange={this.onChangeMonth} type="number">
+                        <Form.Control as="select" defaultValue={this.state.dateMonth} custom onChange={this.onChangeMonth}>
                             <option value = "1">1</option>
                             <option value = "2">2</option>
                             <option value = "3">3</option>
@@ -195,7 +257,7 @@ export default class EditExercise extends Component {
 
                         <Form.Group as={Col} controlId="formGridDay">
                         <Form.Label>Dzień</Form.Label>
-                        <Form.Control as="select" defaultValue={this.state.dateDay}  onChange={this.onChangeDay} >
+                        <Form.Control as="select" defaultValue={this.state.dateDay} custom onChange={this.onChangeDay}>
                             <option value = "1">1</option>
                             <option value = "2">2</option>
                             <option value = "3">3</option>
@@ -232,7 +294,7 @@ export default class EditExercise extends Component {
                     </Form.Row>
 
                     <Button variant="primary" type="submit">
-                        Zaktualizuj ćwiczenie
+                        Aktualizuj Produkt
                     </Button>
                 </Jumbotron>
             </Form>

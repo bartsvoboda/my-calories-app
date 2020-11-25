@@ -40,7 +40,7 @@ router.post('/:id',passport.authenticate('jwt', {session: false}), (req,res) => 
     Food.findById(req.params.id)
       .then(food => {
         food.name = req.body.name,
-        food.weight = Number(req.body.duration),
+        food.weight = Number(req.body.weight),
         food.proteins = Number(req.body.proteins),
         food.carbohydrates = Number(req.body.carbohydrates),
         food.fats = Number(req.body.fats),
@@ -50,7 +50,7 @@ router.post('/:id',passport.authenticate('jwt', {session: false}), (req,res) => 
         food.dateDay = Number(req.body.dateDay)
   
         food.save()
-          .then(() => res.json('Food updated!'))
+          .then(() => res.status(200).json('Food updated!'))
           .catch(err => res.status(400).json('Error: ' + err));
       })
       .catch(err => res.status(400).json('Error: ' + err));

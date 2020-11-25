@@ -31,7 +31,7 @@ const Food = props => (
         <td>{props.food.kcals}</td>
         <td>{(props.food.kcals/100)*props.food.weight}</td>
         <td>
-            <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>Usuń</a>
+            <Link to={"food/edit/"+props.food._id}>Edytuj</Link> | <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>Usuń</a>
         </td>
     </tr>
 )
