@@ -1,10 +1,11 @@
 import React , { Component } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
 
 import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
+
+import {Col, Button, Form, Jumbotron} from 'react-bootstrap';
+import { getJwt } from '../helpers/jwt';
 
 export default class AddFood extends Component {
     constructor(props) {
@@ -27,8 +28,9 @@ export default class AddFood extends Component {
             carbohydrates:0,
             fats:0,
             kcals:0,
-            user_id:'',
-            date: new Date()
+            dateYear: todayDate.getFullYear(),
+            dateMonth: todayDate.getMonth()+1,
+            dateDay: todayDate.getDate()
         }
     }
 

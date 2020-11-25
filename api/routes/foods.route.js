@@ -1,9 +1,7 @@
 const router = require("express").Router();
-const checkAuth = require("../config/check-auth");
-const CheckAuth = require("../config/check-auth");
+const passport = require('passport');
+const Food = require('../models/food.model');
 
-// Load food model
-let Food = require("../models/food.model");
 
 router.route('/').get((req, res) => {
     Food.find()
@@ -44,14 +42,14 @@ router.route('/update/:id').post((req,res) => {
         .catch(err => res.status(400).json('Error: '+ err));
 });
 
-router.post('/add',(req,res)  => {
+router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
+    const userId = req.user.id;
     const name = req.body.name;
     const weight = Number(req.body.weight);
     const proteins = Number(req.body.proteins);
     const carbohydrates = Number(req.body.carbohydrates);
     const fats = Number(req.body.fats);
     const kcals = Number(req.body.kcals);
-    const user_id = req.body.user_id;
     const dateYear = req.body.dateYear;
     const dateMonth = req.body.dateMonth;
     const dateDay = req.body.dateDay;
@@ -63,7 +61,7 @@ router.post('/add',(req,res)  => {
         carbohydrates,
         fats,
         kcals,
-        user_id,
+        userId,
         dateYear,
         dateMonth,
         dateDay
