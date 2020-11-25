@@ -6,7 +6,10 @@ import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 import {Col, Button, Form, Jumbotron} from 'react-bootstrap';
 
+import CaloriesDailyDiary from './calories-diary.component';
+
 import { getJwt } from '../helpers/jwt';
+import { getReqCalories} from '../helpers/calories';
 
 const Exercise = props => (
     <tr>
@@ -15,7 +18,7 @@ const Exercise = props => (
         <td>{props.exercise.kcalperhour}</td>
         <td>{(props.exercise.kcalperhour)*(props.exercise.duration/60).toPrecision(1)}</td>
         <td>
-            <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
+            <Link to={"/edit/"+props.exercise._id}>Edytuj</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>Usuń</a>
         </td>
     </tr>
 )
@@ -30,7 +33,7 @@ const Food = props => (
         <td>{props.food.kcals}</td>
         <td>{(props.food.kcals/100)*props.food.weight}</td>
         <td>
-            <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
+            <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>Usuń</a>
         </td>
     </tr>
 )
@@ -204,6 +207,9 @@ export default class CaloriesDiary extends Component {
             return prev + + ((current.fats/100) * current.weight)
         },0);
 
+        let goalCalories = 0;
+        goalCalories = parseInt(getReqCalories());
+
 
         return(
             <div>
@@ -332,7 +338,40 @@ export default class CaloriesDiary extends Component {
                     <p> Suma Tłuszczy: {fatSum} gram</p>
                     <p><strong>Suma Kalorii z jedzenia </strong> : {foodSumKcal.toFixed(1)}</p>
                 </Jumbotron>
-                
+
+
+                <Jumbotron>
+                <h3> Dzisiejszy bilans</h3>
+                <p><strong></strong></p>
+
+                <table className = "table">
+                        <thead className = "thead-light">
+                            <tr>
+                                <th><center>Wymagane Kalorie</center></th>
+                                <th><center> - </center></th>
+                                <th><center>Kalorie z jedzenia</center></th>
+                                <th><center> + </center></th>
+                                <th><center>Kalorie z ćwiczeń</center></th>
+                                <th><center> = </center></th>
+                                <th><center> Bilans </center></th>
+
+                            </tr>
+                            <tr>
+                                <th><center>{goalCalories.toFixed(0)}</center></th>
+                                <th><center> - </center></th>
+                                <th><center>{foodSumKcal.toFixed(0)}</center></th>
+                                <th><center> + </center></th>
+                                <th><center>{exerciseSumKcal.toFixed(0)}</center></th>
+                                <th><center> = </center></th>
+                                <th><center> {(goalCalories - foodSumKcal + exerciseSumKcal).toFixed(0)} </center></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </Jumbotron>
             </div>
         );
     }

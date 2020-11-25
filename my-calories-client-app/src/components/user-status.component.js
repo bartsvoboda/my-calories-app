@@ -131,6 +131,8 @@ export default class UserStatus extends Component {
             dailyCalories = BMRwithActivity + 500;
         }
 
+        localStorage.setItem('dailyCalories', dailyCalories);
+
         //Estimate number of weeks to reach weight
         let numberofWeeks=0;
         if(goal === "Utrata masy ciała"){
@@ -166,7 +168,6 @@ export default class UserStatus extends Component {
                         <p> <strong> Ilość dziennych kalorii: </strong> {dailyCalories.toFixed(0)} kcal </p>
                         <br/>
                         
-                        <CaloriesDailyDiary dailyCalories={dailyCalories.toFixed(0)} />
                 </Jumbotron>        
                    
             </div>

@@ -136,7 +136,7 @@ export default class AddFood extends Component {
         })
         .then(res => console.log(res.data));
 
-        this.props.history.push("/user/status");
+        this.props.history.push("/diary");
     }
 
 
