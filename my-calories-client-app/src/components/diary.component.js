@@ -310,7 +310,7 @@ export default class CaloriesDiary extends Component {
                             {this.exercisesList()}
                         </tbody>
                     </table>
-                    <p><strong>Suma Kalorii z ćwiczeń </strong> : {exerciseSumKcal.toFixed(1)}</p>
+                    <p><strong>Suma Kalorii z ćwiczeń </strong> : {exerciseSumKcal.toFixed(0)} kcal</p>
                 </Jumbotron>
 
                 <Jumbotron>
@@ -333,10 +333,10 @@ export default class CaloriesDiary extends Component {
                         </tbody>
                     </table>
                     <br/>
-                    <p> Suma Białka: {proteinSum} gram </p>
-                    <p> Suma Węglowodanów: {carbohydrateSum} gram</p>
-                    <p> Suma Tłuszczy: {fatSum} gram</p>
-                    <p><strong>Suma Kalorii z jedzenia </strong> : {foodSumKcal.toFixed(1)}</p>
+                    <p> Suma Białka: {proteinSum.toFixed(0)} gram </p>
+                    <p> Suma Węglowodanów: {carbohydrateSum.toFixed(0)} gram</p>
+                    <p> Suma Tłuszczy: {fatSum.toFixed(0)} gram</p>
+                    <p><strong>Suma Kalorii z jedzenia </strong> : {foodSumKcal.toFixed(0)} kcal</p>
                 </Jumbotron>
 
 
