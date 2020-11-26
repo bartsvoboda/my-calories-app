@@ -5,9 +5,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => {
-  console.log(req.headers);  
-  res.send(req.user.username);
+router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
+  res.send(req.user);
 });
 
 router.route('/').get((req, res) => {
@@ -16,6 +15,7 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Register
 router.route('/register').post((req, res) => {
   //Check if user already exist
   User.find({email: req.body.email})
@@ -36,7 +36,7 @@ router.route('/register').post((req, res) => {
             const password = hash;
             const username = req.body.username;
             const age = Number(req.body.age);
-            const isMale = Boolean(req.body.isMale);
+            const isMale = req.body.isMale;
             const height = Number(req.body.height);
             const currentWeight = Number(req.body.currentWeight);
             const goalWeight = Number(req.body.goalWeight);
@@ -63,6 +63,7 @@ router.route('/register').post((req, res) => {
     })
 });
 
+//Login and generate token
 router.post("/login", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -104,6 +105,38 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+//Update user data
+router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
+  const id = req.user._id;
+
+  console.log(id);
+
+  User.updateOne({_id:id}, {$set: req.body})
+  .exec()
+  .then(result =>{
+      console.log(result);
+      res.status(200).json(result);
+  })
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+  });
+});
+
+//Delete user
+router.delete('/deleteUser', passport.authenticate('jwt', { session: false }), (req, res) =>{
+  const id = req.user._id;
+
+  User.findByIdAndDelete(id)
+  .exec()
+  .then(result => {
+    res.status(200).json("User deleted!");
+  })
+  .catch(err => {
+    res.status(500).json({errror: err});
+  });
+})
 
 module.exports = router;
 

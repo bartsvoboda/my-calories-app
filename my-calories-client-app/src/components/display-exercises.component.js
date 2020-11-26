@@ -2,14 +2,15 @@ import React , { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
 import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 
 const Exercise = props => (
 <tr>
-  <td>{props.exercise.username}</td>
   <td>{props.exercise.description}</td>
-  <td>{props.exercise.duration * 3}</td>
   <td>{props.exercise.duration}</td>
   <td>{props.exercise.date.substring(0,10)}</td>
   <td>
@@ -23,8 +24,12 @@ export default class GetExercisesDiary extends Component {
         super(props);
 
         this.deleteExercise = this.deleteExercise.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
 
-        this.state = {exercises: []};
+        this.state = {
+          pickedDate : new Date(),
+          exercises: []
+        };
     }
 
     componentDidMount() {
@@ -52,6 +57,12 @@ export default class GetExercisesDiary extends Component {
         })
     }
 
+    onChangeDate(date){
+      this.setState({
+        pickedDate: date
+      });
+    }
+
     render() {
         return (
           <div>
@@ -59,13 +70,18 @@ export default class GetExercisesDiary extends Component {
             <AuthenticatedComponent/>
             <br/>
               <h3>Logged Exercises</h3>
+              <div className="form-group">
+              <label>Data: </label>
+                  <DatePicker 
+                  selected={this.state.pickedDate}
+                  onChange={this.onChangeDate}
+                  />
+              </div>
               <table className="table">
                 <thead className="thead-light">
                   <tr>
-                    <th>Username</th>
-                    <th>Description</th>
-                    <th>Chuj</th>
-                    <th>Duration</th>
+                    <th>Opis</th>
+                    <th>Czas trwania</th>
                     <th>Date</th>
                     <th>Actions</th>
                   </tr>

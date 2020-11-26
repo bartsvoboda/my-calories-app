@@ -1,10 +1,32 @@
 const router = require('express').Router();
-let Exercise = require('../models/exercise.model');
+const { response } = require('express');
+const passport = require('passport');
+const Exercise = require('../models/exercise.model');
 
-router.route('/').get((req, res) => {
-  Exercise.find()
-    .then(exercises => res.json(exercises))
-    .catch(err => res.status(400).json('Error: ' + err));
+
+router.get('/', passport.authenticate('jwt', { session: false}), (req, res)=>{
+  const userId = req.user.id;
+
+  Exercise.find({userId: userId})
+  .then( exercises =>{
+    res.status(200).json(exercises);
+  })
+  .catch(err =>{
+    res.status(500).json(err);
+  });
+});
+
+router.get('/:id', passport.authenticate('jwt', { session: false}), (req, res)=>{
+  const id = req.params.id;
+
+  Exercise.findById({_id: id})
+  .then( exercise =>{
+    console.log(exercise);
+    res.status(200).json(exercise);
+  })
+  .catch(err =>{
+    res.status(500).json(err);
+  });
 });
 
 router.route('/:id').delete((req, res) => {
@@ -13,41 +35,51 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.post('/update/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
   Exercise.findById(req.params.id)
     .then(exercise => {
-      exercise.username = req.body.username;
-      exercise.description = req.body.description;
-      exercise.duration = Number(req.body.duration);
-      exercise.kcalperhour = Number(req.body.kcalperhour);
-      exercise.date = Date.parse(req.body.date);
+      exercise.description = req.body.description,
+      exercise.duration = Number(req.body.duration),
+      exercise.kcalperhour = Number(req.body.kcalperhour),
+      exercise.dateYear = Number(req.body.dateYear),
+      exercise.dateMonth = Number(req.body.dateMonth),
+      exercise.dateDay = Number(req.body.dateDay)
 
       exercise.save()
         .then(() => res.json('Exercise updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
     .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
+router.post('/add',passport.authenticate('jwt', {session: false}), (req,res) => {
+  const userId = req.user.id;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   const kcalperhour = Number(req.body.kcalperhour);
-  const date = Date.parse(req.body.date);
+  const dateYear = Number(req.body.dateYear);
+  const dateMonth = Number(req.body.dateMonth);
+  const dateDay = Number(req.body.dateDay);
+
 
   const newExercise = new Exercise({
-    username,
+    userId,
     description,
     duration,
     kcalperhour,
-    date,
+    dateYear,
+    dateMonth,
+    dateDay
   });
+
+  console.log(newExercise);
 
   newExercise.save()
   .then(() => res.json('Exercise added!'))
   .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 module.exports = router;

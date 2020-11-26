@@ -7,7 +7,7 @@ import AuthenticatedComponent from './auth.component';
 import {Col, Button, Form, Jumbotron} from 'react-bootstrap';
 import { getJwt } from '../helpers/jwt';
 
-export default class AddFood extends Component {
+export default class EditFood extends Component {
     constructor(props) {
         super(props);
 
@@ -26,7 +26,6 @@ export default class AddFood extends Component {
         let todayDate = new Date();
 
         this.state = {
-            userId: '',
             name: '',
             weight:0,
             proteins:0,
@@ -41,14 +40,20 @@ export default class AddFood extends Component {
 
     componentDidMount() {
         const tokenjwt = getJwt();
+        console.log(this.props.match.params.id);
 
-        axios.get('http://localhost:5000/users/getUser',
+        axios.get('http://localhost:5000/foods/'+this.props.match.params.id,
         {headers: {Authorization: `Bearer ${tokenjwt}`}})
         .then(res => {
             console.log(res.data._id);
             this.setState({
-                userId: res.data._id
-            })            
+                name: res.data.name,
+                weight: res.data.weight,
+                proteins: res.data.proteins,
+                carbohydrates: res.data.carbohydrates,
+                fats: res.data.fats,
+                kcals: res.data.kcals
+            });      
         })
     }
 
@@ -126,10 +131,10 @@ export default class AddFood extends Component {
             dateMonth: this.state.dateMonth,
             dateDay: this.state.dateDay
         }
+        
 
-        console.log(food);
 
-        axios.post('http://localhost:5000/foods/add', food, {
+        axios.post('http://localhost:5000/foods/update/'+this.props.match.params.id, food, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
@@ -139,15 +144,13 @@ export default class AddFood extends Component {
         this.props.history.push("/diary");
     }
 
-
-    
     render() {
         return (
             <Form onSubmit = {this.onSubmit}>
                 <AuthenticatedComponent/>
                 <NavbarMenu/>
                 <Jumbotron>
-                    <center><h3>Dodaj produkt</h3></center>
+                    <center><h3>Edytuj produkt</h3></center>
                     <br/>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridFoodName">
@@ -162,7 +165,7 @@ export default class AddFood extends Component {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridFoodWeight">
-                        <Form.Label>Waga produktu (w gramach)</Form.Label>
+                        <Form.Label>Waga produktu (w gramach na 100 gram)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Czas trwania"
@@ -291,7 +294,7 @@ export default class AddFood extends Component {
                     </Form.Row>
 
                     <Button variant="primary" type="submit">
-                        Dodaj produkt
+                        Aktualizuj Produkt
                     </Button>
                 </Jumbotron>
             </Form>
