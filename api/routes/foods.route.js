@@ -36,7 +36,7 @@ router.route('/:id').delete((req,res) => {
         .catch(err => res.status(400).json('Error: '+ err));
 });
 
-router.post('/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
+router.post('update/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
     Food.findById(req.params.id)
       .then(food => {
         food.name = req.body.name,

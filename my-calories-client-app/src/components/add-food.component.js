@@ -162,7 +162,7 @@ export default class AddFood extends Component {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridFoodWeight">
-                        <Form.Label>Waga produktu (w gramach na 100 gram)</Form.Label>
+                        <Form.Label>Waga produktu (w gramach)</Form.Label>
                         <Form.Control 
                             type="number" 
                             placeholder="Czas trwania"

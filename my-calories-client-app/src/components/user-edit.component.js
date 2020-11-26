@@ -143,7 +143,7 @@ export default class UserEdit extends Component {
 
                 <Form.Row>
                 <Form.Group as={Col} controlId="formGridGender">
-                    <Form.Label>Gender</Form.Label>
+                    <Form.Label>Płeć</Form.Label>
                     <Form.Control as="select" custom onChange={this.onChangeGender}>
                     <option value ="true">Mężczyzna</option>
                     <option value = "false">Kobieta</option>
