@@ -134,7 +134,7 @@ export default class EditFood extends Component {
         
 
 
-        axios.post('http://localhost:5000/foods/'+this.props.match.params.id, food, {
+        axios.post('http://localhost:5000/foods/update/'+this.props.match.params.id, food, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
