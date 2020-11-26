@@ -86,7 +86,7 @@ export default class UserData extends Component {
                     <p> <strong> Email: </strong> {this.state.email} </p>
                     <p> <strong> Płeć: </strong> {gender}  </p>
                     <p> <strong> Wiek: </strong> {this.state.age} lat </p>
-                    <p> <strong> Wzrost: </strong> {this.state.height} lat </p>
+                    <p> <strong> Wzrost: </strong> {this.state.height} cm </p>
                     <p> <strong> Obecna waga: </strong> {this.state.currentWeight} kg</p>
                     <p> <strong> Docelowa waga: </strong> {this.state.goalWeight} kg</p>
                     <p> <strong> Twoja aktywność: </strong> {activityLevel} </p>
