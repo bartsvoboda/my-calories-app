@@ -113,6 +113,7 @@ export default class EditExercise extends Component {
         .then(res => console.log(res.data));
 
         this.props.history.push('/diary');
+        window.location.reload();
     }
 
     render() {
