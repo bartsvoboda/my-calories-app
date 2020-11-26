@@ -35,7 +35,7 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.post('update/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
+router.post('/update/:id',passport.authenticate('jwt', {session: false}), (req,res) => {
   Exercise.findById(req.params.id)
     .then(exercise => {
       exercise.description = req.body.description,
