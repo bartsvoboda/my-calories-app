@@ -107,28 +107,22 @@ router.post("/login", (req, res, next) => {
 });
 
 //Update user data
-router.post('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
+router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
   const id = req.user._id;
 
-  User.findById(id)
-  .then(user => {
-    user.password = req.body.password,
-    user.username = req.body.username,
-    user.age = Number(req.body.age),
-    user.isMale = Boolean(req.body.isMale),
-    user.height = Number(req.body.height),
-    user.currentWeight = Number(req.body.currentWeight),
-    user.goalWeight = Number(req.body.goalWeight),
-    user.activity = req.body.activity
+  console.log(id);
 
-    user.save()
-      .then(() => res.json('User updated!'))
-      .catch(err => res.status(400).json('Error ' +err));
-
+  User.updateOne({_id:id}, {$set: req.body})
+  .exec()
+  .then(result =>{
+      console.log(result);
+      res.status(200).json(result);
   })
-  .catch(err => res.status(400).json('Error' + err));
+  .catch(err => {
+      console.log(err);
+      res.status(500).json({error: err});
+  });
 });
-
 
 module.exports = router;
 

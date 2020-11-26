@@ -27,7 +27,7 @@ export default class UserEdit extends Component {
             height: 0,
             currentWeight: 0,
             goalWeight: 0,
-            activity: ''
+            activity: '1'
         }
     }
 
@@ -44,7 +44,8 @@ export default class UserEdit extends Component {
                 isMale: res.data.isMale,
                 height: res.data.height,
                 currentWeight: res.data.currentWeight,
-                goalWeight: res.data.goalWeight
+                goalWeight: res.data.goalWeight,
+                activity: res.data.activity
             });
             console.log(res.data.activity);
             console.log(typeof(res.data.activity));
@@ -81,9 +82,9 @@ export default class UserEdit extends Component {
             goalWeight: e.target.value
         })
     }
-    onChangeActivity(value){
+    onChangeActivity(e){
         this.setState({
-            password: value
+            activity: e.target.value
         })
     }
 
@@ -103,7 +104,7 @@ export default class UserEdit extends Component {
         console.log(user.activity);
         console.log(typeof(user.activity));
     
-        axios.post('http://localhost:5000/users/updateUser',user,{
+        axios.patch('http://localhost:5000/users/updateUser',user,{
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
@@ -147,20 +148,20 @@ export default class UserEdit extends Component {
                 <Form.Row>
                 <Form.Group as={Col} controlId="formGridGender">
                     <Form.Label>Płeć</Form.Label>
-                    <Form.Control as="select" custom onChange={this.onChangeGender}>
-                    <option value ="true">Mężczyzna</option>
-                    <option value = "false">Kobieta</option>
+                    <Form.Control as="select" custom onChange={this.onChangeGender} value={this.state.isMale}>
+                    <option value ={true}>Mężczyzna</option>
+                    <option value = {false}>Kobieta</option>
                     </Form.Control>
                 </Form.Group>
             
                 <Form.Group as={Col} controlId="formGridActivity">
                 <Form.Label>Poziom aktywności</Form.Label>
-                <Form.Control as="select" custom onChange={this.onChangeActivity}>
-                  <option value ="1">Siedzący tryb (brak ćwiczeń lub minimalne ćwiczenia)</option>
-                  <option value = "2">Lekka aktywność (od 1 do 3 razy w tygodniu)</option>
-                  <option value = "3">Umiarkowanie aktywny (od 3 do 5 razy w tygodniu)</option>
-                  <option value = "4">Bardzo aktywny (od 6 do 7 dni)</option>
-                  <option value = "5">Ekstra aktywny (bardzo ciężke ćwiczenia przez 6 lub 7 dni lub praca fizyczna)</option>
+                <Form.Control as="select" custom onChange={this.onChangeActivity} value={this.state.activity}>
+                  <option value ={"1"}>Siedzący tryb (brak ćwiczeń lub minimalne ćwiczenia)</option>
+                  <option value = {"2"}>Lekka aktywność (od 1 do 3 razy w tygodniu)</option>
+                  <option value = {"3"}>Umiarkowanie aktywny (od 3 do 5 razy w tygodniu)</option>
+                  <option value = {"4"}>Bardzo aktywny (od 6 do 7 dni)</option>
+                  <option value = {"5"}>Ekstra aktywny (bardzo ciężke ćwiczenia przez 6 lub 7 dni lub praca fizyczna)</option>
                 </Form.Control>
                </Form.Group>
              </Form.Row>
