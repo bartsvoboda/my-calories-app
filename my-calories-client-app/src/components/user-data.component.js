@@ -43,6 +43,9 @@ export default class UserData extends Component {
                 activity: res.data.activity
             }
             );
+            console.log(typeof(res.data.isMale));
+            console.log(typeof(res.data.activity));
+            console.log(res.data.activity);
         })
     }
 

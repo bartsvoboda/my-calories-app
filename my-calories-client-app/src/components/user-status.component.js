@@ -47,6 +47,7 @@ export default class UserStatus extends Component {
                 activity: res.data.activity
             }
             );
+            console.log(res.data.activity);
         })
     }
 

@@ -36,7 +36,7 @@ router.route('/register').post((req, res) => {
             const password = hash;
             const username = req.body.username;
             const age = Number(req.body.age);
-            const isMale = Boolean(req.body.isMale);
+            const isMale = req.body.isMale;
             const height = Number(req.body.height);
             const currentWeight = Number(req.body.currentWeight);
             const goalWeight = Number(req.body.goalWeight);
@@ -119,7 +119,7 @@ router.post('/updateUser', passport.authenticate('jwt', { session: false }), (re
     user.height = Number(req.body.height),
     user.currentWeight = Number(req.body.currentWeight),
     user.goalWeight = Number(req.body.goalWeight),
-    user.activity = Number(req.body.activity)
+    user.activity = req.body.activity
 
     user.save()
       .then(() => res.json('User updated!'))

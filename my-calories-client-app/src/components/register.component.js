@@ -106,12 +106,14 @@ export default class Register extends Component {
       activity: this.state.activity
     }
 
-    console.log(user);
+    console.log(user.isMale);
+    console.log(typeof(user.activity));
 
     axios.post('http://localhost:5000/users/register', user)
       .then(res => console.log(res.data));
     
     this.props.history.push('/');
+    
   }
 
 
@@ -169,20 +171,20 @@ export default class Register extends Component {
             <Form.Row>
             <Form.Group as={Col} controlId="formGridGender">
                 <Form.Label>Płeć</Form.Label>
-                <Form.Control as="select" custom onChange={this.onChangeGender}>
-                  <option value ="true">Mężczyzna</option>
-                  <option value = "false">Kobieta</option>
+                <Form.Control as="select" custom onChange={this.onChangeGender} value={this.state.isMale}>
+                  <option value = {true} >Mężczyzna</option>
+                  <option value = {false}>Kobieta</option>
                 </Form.Control>
               </Form.Group>
           
               <Form.Group as={Col} controlId="formGridActivity">
                 <Form.Label>Poziom aktywności</Form.Label>
-                <Form.Control as="select" custom onChange={this.onChangeActivity}>
-                  <option value ="1">Siedzący tryb (brak ćwiczeń lub minimalne ćwiczenia)</option>
-                  <option value = "2">Lekka aktywność (od 1 do 3 razy w tygodniu)</option>
-                  <option value = "3">Umiarkowanie aktywny (od 3 do 5 razy w tygodniu)</option>
-                  <option value = "4">Bardzo aktywny (od 6 do 7 dni)</option>
-                  <option value = "5">Ekstra aktywny (bardzo ciężke ćwiczenia przez 6 lub 7 dni lub praca fizyczna)</option>
+                <Form.Control as="select" custom onChange={this.onChangeActivity} value={this.state.activity}>
+                  <option value ={"1"}>Siedzący tryb (brak ćwiczeń lub minimalne ćwiczenia)</option>
+                  <option value = {"2"}>Lekka aktywność (od 1 do 3 razy w tygodniu)</option>
+                  <option value = {"3"}>Umiarkowanie aktywny (od 3 do 5 razy w tygodniu)</option>
+                  <option value = {"4"}>Bardzo aktywny (od 6 do 7 dni)</option>
+                  <option value = {"5"}>Ekstra aktywny (bardzo ciężke ćwiczenia przez 6 lub 7 dni lub praca fizyczna)</option>
                 </Form.Control>
               </Form.Group>
             </Form.Row>
