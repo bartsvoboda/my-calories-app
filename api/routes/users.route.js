@@ -124,5 +124,19 @@ router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (r
   });
 });
 
+//Delete user
+router.delete('/deleteUser', passport.authenticate('jwt', { session: false }), (req, res) =>{
+  const id = req.user._id;
+
+  User.findByIdAndDelete(id)
+  .exec()
+  .then(result => {
+    res.status(200).json("User deleted!");
+  })
+  .catch(err => {
+    res.status(500).json({errror: err});
+  });
+})
+
 module.exports = router;
 
