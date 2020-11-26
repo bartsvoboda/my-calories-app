@@ -101,13 +101,14 @@ export default class UserEdit extends Component {
     
         console.log(user);
     
-        axios.patch('http://localhost:5000/users/updateUser',user,{
+        axios.post('http://localhost:5000/users/updateUser',user,{
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
         })
        .then(res => console.log(res.data));
         this.props.history.push("/user/status");
+        window.location.reload();
     }
     
 
