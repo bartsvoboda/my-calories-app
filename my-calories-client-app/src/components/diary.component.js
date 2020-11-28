@@ -116,7 +116,10 @@ export default class CaloriesDiary extends Component {
     }
 
     deleteExercise(id) {
-        axios.delete('http://localhost:5000/exercises/'+id)
+        const tokenjwt = getJwt();
+
+        axios.delete('http://localhost:5000/exercises/'+id,
+        {headers: {Authorization: `Bearer ${tokenjwt}`}})
         .then(response => console.log(response.data));
         this.setState({
             exercises: this.state.exercises.filter(el => el._id !== id)

@@ -105,7 +105,7 @@ export default class EditExercise extends Component {
 
         console.log(typeof(exercise.dateDay));
 
-        axios.post('http://localhost:5000/exercises/update/'+this.props.match.params.id, exercise, {
+        axios.patch('http://localhost:5000/exercises/update/'+this.props.match.params.id, exercise, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
