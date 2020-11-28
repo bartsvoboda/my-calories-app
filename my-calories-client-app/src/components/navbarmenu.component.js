@@ -21,13 +21,13 @@ export default class NavbarMenu extends Component{
               <Link to = '/user/status' className="navbar-brand"> Status</Link>            
               <Nav className="mr-auto">
               <NavDropdown title="Mój profil" id="basic-nav-dropdown">
-                 <NavDropdown.Item href="/user/data/"> Moje Dane </NavDropdown.Item>
+                 <NavDropdown.Item href="/user/data"> Moje Dane </NavDropdown.Item>
                  <NavDropdown.Item href="/user/edit"> Edytuj Dane</NavDropdown.Item>
                  <NavDropdown.Divider />
-                 <NavDropdown.Item href="/user/delete/:id"> Usuń konto</NavDropdown.Item>
+                 <NavDropdown.Item href="/user/delete"> Usuń konto</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link href="/food/diary/add/:id">+ Jedzenie</Nav.Link>
-              <Nav.Link href="/exercise/diary/add/:id">+ Ćwiczenia</Nav.Link>
+              <Nav.Link href="/food/add">+ Jedzenie</Nav.Link>
+              <Nav.Link href="/exercise/add">+ Ćwiczenia</Nav.Link>
               <Nav.Link href="/diary">Dziennik</Nav.Link>
               </Nav>
               <Form inline>

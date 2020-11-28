@@ -8,8 +8,6 @@ import NavbarMenu from './navbarmenu.component';
 import AuthenticatedComponent from './auth.component';
 import { getJwt } from '../helpers/jwt';
 
-import CaloriesDailyDiary from './calories-diary.component';
-
 
 export default class UserStatus extends Component {
     constructor(props){
