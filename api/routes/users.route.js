@@ -64,7 +64,7 @@ router.route('/register').post((req, res) => {
     })
 });
 
-//Login and generate token
+
 router.post("/login", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -107,7 +107,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-//Update user data
+
 router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (req, res) => { 
   const id = req.user._id;
 
@@ -125,7 +125,8 @@ router.patch('/updateUser', passport.authenticate('jwt', { session: false }), (r
   });
 });
 
-//Delete user
+
+
 router.delete('/deleteUser', passport.authenticate('jwt', { session: false }), (req, res) =>{
   const id = req.user._id;
 
