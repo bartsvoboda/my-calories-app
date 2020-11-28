@@ -134,7 +134,7 @@ export default class EditFood extends Component {
         
 
 
-        axios.post('http://localhost:5000/foods/update/'+this.props.match.params.id, food, {
+        axios.patch('http://localhost:5000/foods/update/'+this.props.match.params.id, food, {
             headers: {
                 Authorization: `Bearer ${tokenjwt}`
             }
@@ -142,6 +142,7 @@ export default class EditFood extends Component {
         .then(res => console.log(res.data));
 
         this.props.history.push("/diary");
+        window.location.reload();
     }
 
     render() {

@@ -92,9 +92,6 @@ export default class CaloriesDiary extends Component {
         .catch(error => {
             console.log(error);
         })
-
-
-
     }
 
     onChangeYear(e){
@@ -116,7 +113,10 @@ export default class CaloriesDiary extends Component {
     }
 
     deleteExercise(id) {
-        axios.delete('http://localhost:5000/exercises/'+id)
+        const tokenjwt = getJwt();
+
+        axios.delete('http://localhost:5000/exercises/'+id,
+        {headers: {Authorization: `Bearer ${tokenjwt}`}})
         .then(response => console.log(response.data));
         this.setState({
             exercises: this.state.exercises.filter(el => el._id !== id)
@@ -130,7 +130,10 @@ export default class CaloriesDiary extends Component {
     }
 
     deleteFood(id) {
-        axios.delete('http://localhost:5000/foods/'+id)
+        const tokenjwt = getJwt();
+        
+        axios.delete('http://localhost:5000/foods/'+id,
+        {headers: {Authorization: `Bearer ${tokenjwt}`}})
         .then(response => console.log(response.data));
         this.setState({
             foods: this.state.foods.filter(el => el._id !== id)
