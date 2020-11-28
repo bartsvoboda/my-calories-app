@@ -9,21 +9,22 @@ router.get('/getUser', passport.authenticate('jwt', { session: false }), (req, r
   res.send(req.user);
 });
 
+
 router.route('/').get((req, res) => {
   User.find()
     .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json(err));
 });
 
-//Register
+
+
 router.route('/register').post((req, res) => {
-  //Check if user already exist
   User.find({email: req.body.email})
     .exec()
     .then(user => {
       if (user.length >= 1){
         return res.status(409).json({
-          message: "Mail exists"
+          message: "Użytkownik o tym emailu instnieje"
         });
       } else {
         bcrypt.hash(req.body.password, 10, (err,hash) => {
@@ -55,8 +56,8 @@ router.route('/register').post((req, res) => {
             });
 
             newUser.save()
-              .then(() => res.json('User added!'))
-              .catch(err => res.status(400).json('Error: ' + err));
+              .then(() => res.json('Dodano użytkownika!'))
+              .catch(err => res.status(400).json(err));
           }
         });
       }
@@ -70,13 +71,13 @@ router.post("/login", (req, res, next) => {
     .then(user => {
       if (user.length < 1) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Błąd Autoryzacji!"
         });
       }
       bcrypt.compare(req.body.password, user[0].password, (err, result) => {
         if (err) {
           return res.status(401).json({
-            message: "Auth failed"
+            message: "Błąd Autoryzacji!"
           });
         }
         if (result) {
@@ -94,7 +95,7 @@ router.post("/login", (req, res, next) => {
           return res.status(200).send(token);
         }
         res.status(401).json({
-          message: "Auth failed"
+          message: "Błąd Autoryzacji!"
         });
       });
     })
@@ -131,7 +132,7 @@ router.delete('/deleteUser', passport.authenticate('jwt', { session: false }), (
   User.findByIdAndDelete(id)
   .exec()
   .then(result => {
-    res.status(200).json("User deleted!");
+    res.status(200).json("Użytkownik usunięty!");
   })
   .catch(err => {
     res.status(500).json({errror: err});
